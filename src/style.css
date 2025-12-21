@@ -1,0 +1,158 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+:root {
+    --bgColor: #F3F8FF;
+    --primaryColor: #8EC3B0;
+    --baseVariant: #FFFFFF;
+    --headerColor: #8EC3B0;
+    --databgColor: #F3F8FF;
+    --notebgColor: #FFFFFF;
+    --displayColor: #FFFFFF;
+    --cardHoverBgColor:#EA9ABB;
+    --buttonBgColor: #ffffff;
+    --buttonBorderColor:#fff;
+    --recordGpBgColor:#dd9898;
+    --dataFontSize: 2rem;
+    --hederFontSize: 20px;
+    --headerFontfamily: "Cardo", serif;
+    --noteFontfamily: "Handlee", cursive;
+}
+
+
+.darkmode{
+    --bgColor:#6218eb;
+    --primaryColor:#A594F9;
+    --baseVariant:#F5EFFF;
+    --headerColor:#CDC1FF;
+    --databgColor: #A594F9;   
+    --notebgColor: #CDC1FF;
+    --displayColor: #CDC1FF;
+    --cardHoverBgColor:#8000ff;
+    --buttonBgColor:#57a8c1;
+    --buttonBorderColor:#57a8c1;
+    --recordGpBgColor:#CDC1FF;
+    --dataFontSize:2rem;
+    --hederFontSize: 20px;
+    --headerFontfamily: "Cardo", serif;
+    --noteFontfamily:"Handlee", cursive;
+}
+
+/* Start of the toogle bar */
+#theme-switch{
+  height: 40px;
+  width: 40px;
+  padding: 0;
+  border-radius: 50%;
+  background-color: var(--baseVariant);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.4s ease, transform 0.3s ease;
+
+}
+
+#theme-switch:hover {
+    transform: scale(1.1);
+}
+
+#theme-switch svg {
+    fill: var(--primary-color);
+    transition: fill 0.4s ease, opacity 0.4s ease;
+}
+
+#theme-switch svg:last-child {
+    display: none;
+}
+
+.darkmode #theme-switch svg:first-child {
+    display: none;
+}
+
+.darkmode #theme-switch svg:last-child {
+    display: block;
+}
+
+
+.navBar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    background-color: var(--cardHoverBgColor);
+
+}
+
+.navBar button{
+    padding: 0.5rem;
+    width: 5rem;
+    border: none;
+    border-radius: 0.3rem;
+}
+
+.homeBody{
+    display: grid;
+    height: 100vh;
+    width: 100%;
+    grid-template-columns: repeat(2,minmax(200px,1fr));
+    grid-template-rows: repeat(10,1fr);
+    gap:10px;
+    padding: 0.5rem;
+}
+
+.recordGp,
+.formDisplayGp,
+.taskDisplayGp{
+    border-radius: 0.5rem;
+}
+
+.recordGp{
+    grid-area: 1 / 1 / 2 / 2;
+    background-color: var(--recordGpBgColor);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.formDisplayGp{
+    grid-area: 2 / 1 / 11 / 2;
+    background-color: pink;
+}
+
+.taskDisplayGp{
+    grid-area: 1 / 2 / 11 / 3;
+    background-color: #A594F9;
+}
+
+/* Add from Button Style */
+ 
+/* From Uiverse.io by ErzenXz */ 
+.recordGp button {
+  width: fit-content;
+  min-width: 100px;
+  height: 45px;
+  padding: 8px;
+  border-radius: 5px;
+  border: 2.5px solid var(--buttonBorderColor);
+  box-shadow: 0px 0px 20px -20px;
+  cursor: pointer;
+  background-color: var(--buttonBgColor);
+  transition: all 0.2s ease-in-out 0ms;
+  user-select: none;
+  font-family: 'Poppins', sans-serif;
+}
+
+.recordGp button:hover {
+  background-color: var(--buttonBgColor);
+  box-shadow: 0px 0px 20px -18px;
+}
+
+.recordGp button:active {
+  transform: scale(0.95);
+}
