@@ -1,6 +1,7 @@
 import { elementFactory } from "./elementFactory"
 import { Darkmode } from "./switchTheme"
 import { Form } from "./createForm"
+import { TaskInputHandler } from "./taskInputHandler"
 
 class DomController{
 
@@ -36,11 +37,30 @@ class DomController{
 
         elementFactory.pushElements(recordBody,[addTasks,addProjects])
 
+        // To handle, get and return of task
+        let handler = new TaskInputHandler()
         // Render Form 
         addTasks.addEventListener("click",() =>{
-            formDisplayGp.append(Form.RenderForm())
+            formDisplayGp.append(Form.RenderTaskForm())
+
+            const taskFrom = document.getElementById('taskForm')
+            taskFrom.addEventListener("submit",(event)=>{
+            event.preventDefault()
+            handler.getTaskInput() 
+
+            // Get the task list from input handler and render them in taskDisplay section
+            let tasksToDisplay = handler.returnTaskInput()
+            for(let i = 0; i < tasksToDisplay.length; i++){
+                taskDisplayGp.append(elementFactory.displaycardElement(tasksToDisplay[i]))
+            }
         })
         
+        })
+
+        addProjects.addEventListener("click",() =>{
+            formDisplayGp.append(Form.RenderProjectForm())
+        })
+
     }
 
 

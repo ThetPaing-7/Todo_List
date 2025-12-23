@@ -4,34 +4,48 @@ class Form{
 
     static form = document.createElement("form")
 
+
     constructor(){
 
     }
     
-    static RenderForm(){
+    static RenderTaskForm(){
         this.form.innerHTML = ""
         this.form.setAttribute("action","")
         this.form.setAttribute("method","get")
+        this.form.setAttribute("id","taskForm")
         this.TextInputElement()
         this.ProjectListElement()
         this.TaskImportantLevelElement()
         this.dueDateElement()
-        this.BtnElement("Add","submit-btn","submitBtn","submit")
-        this.BtnElement("Clear","clear-btn","clearBtn","reset")
+        this.BtnElement("Add","submit-btn","submitTaskBtn","submit")
+        this.BtnElement("Clear","clear-btn","clearTaskBtn","reset")
+        return this.form
+    }
+
+    static RenderProjectForm(){
+        this.form.innerHTML = ""
+        this.form.setAttribute("action","")
+        // this.form.setAttribute("method","get")
+        this.ProjectInputElement()
+        this.TaskImportantLevelElement()
+        this.dueDateElement()
+        this.BtnElement("Add","submit-btn","submitProjectBtn","submit")
+        this.BtnElement("Clear","clear-btn","clearProjectBtn","reset")
         return this.form
     }
 
     // Class for task elementp
     static TextInputElement(){
         const taskLable = elementFactory.makeFormElement("label","Task Name: ","","","taskName","","","")
-        const taskInput = elementFactory.makeFormElement("input","","","","","taskName","text",1)
+        const taskInput = elementFactory.makeFormElement("input","","","taskInput","","taskName","text",1)
         this.form.append(taskLable)
         this.form.append(taskInput)
     }
 
     static ProjectInputElement(){
         const taskLable = elementFactory.makeFormElement("label","Project Name: ","","","projectName","","","")
-        const taskInput = elementFactory.makeFormElement("input","","","","","ProjectName","text",1)
+        const taskInput = elementFactory.makeFormElement("input","","","projectInput","","ProjectName","text",1)
         this.form.append(taskLable)
         this.form.append(taskInput)
     }
@@ -39,7 +53,7 @@ class Form{
     static ProjectListElement(){
         const ProjectLevel = elementFactory.makeFormElement("label","Choose A project:","","","projects","",0)
         
-        const optionHolder = elementFactory.makeElement("select","","ProjectOptions")
+        const optionHolder = elementFactory.makeElement("select","","","ProjectOptions")
         optionHolder.name = "projects"
 
         const optionOne = elementFactory.optionElement("option","Project One","","","Project One")
@@ -57,7 +71,7 @@ class Form{
     static TaskImportantLevelElement(){
         const ImportantLable = elementFactory.makeFormElement("label","Choose Urgent level:","","","importantLevel","",0)
         
-        const optionHolder = elementFactory.makeElement("select","","levelOptions")
+        const optionHolder = elementFactory.makeElement("select","","","levelOptions")
         optionHolder.name = "level"
 
         const optionOne = elementFactory.optionElement("option","Chill","","","chill")
@@ -73,8 +87,8 @@ class Form{
     }
 
     static dueDateElement(){
-        const dueDateLable = elementFactory.makeFormElement("label","Due Date","","dDate","dDate","","")
-        const dueDateInput = elementFactory.makeFormElement("input","","due-date","dDate","","2018-07-22","date",1)
+        const dueDateLable = elementFactory.makeFormElement("label","Due Date","","","dDate","dDate","","")
+        const dueDateInput = elementFactory.makeFormElement("input","","due-date","dDate","","","date",1)
 
         const today = new Date()
         dueDateInput.min = today.toLocaleDateString()
