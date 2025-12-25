@@ -1,21 +1,22 @@
 import { elementFactory } from "./elementFactory"
+import { projectInputHandler } from "./handleProject"
 
 class Form{
 
-    static form = document.createElement("form")
-
+    static form = document.createElement("form")    
+    
 
     constructor(){
 
     }
     
-    static RenderTaskForm(){
+    static RenderTaskForm(project){
         this.form.innerHTML = ""
         this.form.setAttribute("action","")
         this.form.setAttribute("method","get")
         this.form.setAttribute("id","taskForm")
         this.TextInputElement()
-        this.ProjectListElement()
+        this.ProjectListElement(project)
         this.TaskImportantLevelElement()
         this.dueDateElement()
         this.BtnElement("Add","submit-btn","submitTaskBtn","submit")
@@ -26,7 +27,8 @@ class Form{
     static RenderProjectForm(){
         this.form.innerHTML = ""
         this.form.setAttribute("action","")
-        // this.form.setAttribute("method","get")
+        this.form.setAttribute("method","get")
+        this.form.setAttribute("id","projectForm")
         this.ProjectInputElement()
         this.TaskImportantLevelElement()
         this.dueDateElement()
@@ -50,18 +52,28 @@ class Form{
         this.form.append(taskInput)
     }
 
-    static ProjectListElement(){
+    static ProjectListElement(project){
         const ProjectLevel = elementFactory.makeFormElement("label","Choose A project:","","","projects","",0)
         
         const optionHolder = elementFactory.makeElement("select","","","ProjectOptions")
         optionHolder.name = "projects"
 
-        const optionOne = elementFactory.optionElement("option","Project One","","","Project One")
-        const optionTwo = elementFactory.optionElement("option","Project Two","","","Project Two")
-        const optionThree = elementFactory.optionElement("option","Project Three","","","Project Three")
+        let renderProjectList = []
+        // let projectHandle = new projectInputHandler()
+        // let retrunProjects = projectHandle.getProjectInput()
 
+        for(let i = 0; i < project.length; i++){
+            let currentProject = project[i]
+            let option = elementFactory.optionElement("option",currentProject[i].projectName,"","",currentProject[i].projectName)
+            renderProjectList.push(option)
+        }
+
+        // const optionOne = elementFactory.optionElement("option","Project One","","","Project One")
+        // const optionTwo = elementFactory.optionElement("option","Project Two","","","Project Two")
+        // const optionThree = elementFactory.optionElement("option","Project Three","","","Project Three")
         // Append to the option holder
-        elementFactory.pushElements(optionHolder,[optionOne,optionTwo,optionThree])
+        // elementFactory.pushElements(optionHolder,projectLists)
+        elementFactory.pushElements(optionHolder,renderProjectList)
 
         // Append to the main Form
         this.form.append(ProjectLevel)

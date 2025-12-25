@@ -2,6 +2,7 @@ import { elementFactory } from "./elementFactory"
 import { Darkmode } from "./switchTheme"
 import { Form } from "./createForm"
 import { TaskInputHandler } from "./taskInputHandler"
+import { projectInputHandler } from "./handleProject"
 
 class DomController{
 
@@ -37,19 +38,26 @@ class DomController{
 
         elementFactory.pushElements(recordBody,[addTasks,addProjects])
 
-        // To handle, get and return of task
-        let handler = new TaskInputHandler()
+        
+
+        // To handle, get and return of project Input
+        let projectHandler = new projectInputHandler()
+        let retrunProjects = projectHandler.returnProjectInput()
+        // To handle, get and return of task Input
+        let taskHandler = new TaskInputHandler()
         // Render Form 
         addTasks.addEventListener("click",() =>{
-            formDisplayGp.append(Form.RenderTaskForm())
+            
+            formDisplayGp.append(Form.RenderTaskForm(retrunProjects))
 
             const taskFrom = document.getElementById('taskForm')
             taskFrom.addEventListener("submit",(event)=>{
             event.preventDefault()
-            handler.getTaskInput() 
+            taskHandler.getTaskInput() 
 
             // Get the task list from input handler and render them in taskDisplay section
-            let tasksToDisplay = handler.returnTaskInput()
+            let tasksToDisplay = taskHandler.returnTaskInput()
+            taskDisplayGp.textContent = ""
             for(let i = 0; i < tasksToDisplay.length; i++){
                 taskDisplayGp.append(elementFactory.displaycardElement(tasksToDisplay[i]))
             }
@@ -59,6 +67,15 @@ class DomController{
 
         addProjects.addEventListener("click",() =>{
             formDisplayGp.append(Form.RenderProjectForm())
+            // Grab the form
+            const projectForm = document.getElementById('projectForm')
+            projectForm.addEventListener("submit", (event) => {
+                event.preventDefault()
+
+                // Get the input from user
+                projectHandler.getProjectInput()
+
+            })
         })
 
     }

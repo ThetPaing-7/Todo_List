@@ -60,7 +60,7 @@ class elementFactory{
         const deleteTask = elementFactory.makeElement("button","D","delete-btn","")
 
         elementFactory.pushElements(card,[task,project,importance,dueDateDisplayEl])
-        elementFactory.pushElements(card,deleteTask)
+        elementFactory.pushElements(card,[deleteTask])
         
         return card;
     }

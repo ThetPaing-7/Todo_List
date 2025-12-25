@@ -23,10 +23,6 @@ class TaskInputHandler{
         
         this.taskStorage.push(task)
         
-        console.log(this.taskStorage[0].taskName)
-        console.log(this.taskStorage[0].projectName)
-        console.log(this.taskStorage[0].taskImportantLevel)
-        console.log(this.taskStorage[0].dueDate)
     }
 
     returnTaskInput(){
