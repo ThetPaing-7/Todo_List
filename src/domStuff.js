@@ -1,8 +1,7 @@
 import { elementFactory } from "./elementFactory"
 import { Darkmode } from "./switchTheme"
-import { Form } from "./createForm"
-import { TaskInputHandler } from "./taskInputHandler"
-import { projectInputHandler } from "./handleProject"
+import { taskDOMControll } from "./taskController"
+import { projectDOMControll } from "./projectController"
 
 class DomController{
 
@@ -33,50 +32,71 @@ class DomController{
 
         elementFactory.pushElements(this.body,[recordBody,formDisplayGp,taskDisplayGp])
 
-        const addTasks = elementFactory.makeElement("button","Add Task","","addTasksBtn")
-        const addProjects = elementFactory.makeElement("button","Add Project","","addProjectsBtn")
+        const addTasks = elementFactory.makeElement("button","Add Task","add task","addTasksBtn")
+        const addProjects = elementFactory.makeElement("button","Add Project","add project","addProjectsBtn")
 
         elementFactory.pushElements(recordBody,[addTasks,addProjects])
 
-        
+        const taskFrom = document.getElementById('taskForm')
 
-        // To handle, get and return of project Input
-        let projectHandler = new projectInputHandler()
-        let retrunProjects = projectHandler.returnProjectInput()
-        // To handle, get and return of task Input
-        let taskHandler = new TaskInputHandler()
-        // Render Form 
-        addTasks.addEventListener("click",() =>{
-            
-            formDisplayGp.append(Form.RenderTaskForm(retrunProjects))
+        const actionButtons = document.querySelectorAll('.add')
+        actionButtons.forEach(button => button.addEventListener("click",(event)=>{
+            const item = event.target.id
 
-            const taskFrom = document.getElementById('taskForm')
-            taskFrom.addEventListener("submit",(event)=>{
-            event.preventDefault()
-            taskHandler.getTaskInput() 
-
-            // Get the task list from input handler and render them in taskDisplay section
-            let tasksToDisplay = taskHandler.returnTaskInput()
-            taskDisplayGp.textContent = ""
-            for(let i = 0; i < tasksToDisplay.length; i++){
-                taskDisplayGp.append(elementFactory.displaycardElement(tasksToDisplay[i]))
+            if(item === 'addTasksBtn'){
+                formDisplayGp.replaceChildren()
+                const taskControl = new taskDOMControll(formDisplayGp,taskDisplayGp)
+                taskControl.DoTaskDomStuff()
+            }else if(item === 'addProjectsBtn'){
+                formDisplayGp.replaceChildren()
+                const projectControl = new projectDOMControll(formDisplayGp,taskDisplayGp)
+                projectControl.DoProjectDomStuff()
+            }else{
+                console.log("enter A valid click")
             }
-        })
+        }))
         
-        })
+        
 
-        addProjects.addEventListener("click",() =>{
-            formDisplayGp.append(Form.RenderProjectForm())
-            // Grab the form
-            const projectForm = document.getElementById('projectForm')
-            projectForm.addEventListener("submit", (event) => {
-                event.preventDefault()
+        // let projectHandler = new projectInputHandler()
+        // // To handle, get and return of task Input
+        // let taskHandler = new TaskInputHandler()
+        // // Render Form 
+        // addTasks.addEventListener("click",() =>{
 
-                // Get the input from user
-                projectHandler.getProjectInput()
+        //     // To handle, get and return of project Input
+            
+        //     formDisplayGp.innerHTML = ""
+        //     formDisplayGp.append(Form.RenderTaskForm())
 
-            })
-        })
+        //     const taskFrom = document.getElementById('taskForm')
+        //     taskFrom.addEventListener("submit",(event)=>{   
+        //     event.preventDefault()
+        //     taskHandler.getTaskInput(taskFrom) 
+
+        //     // Get the task list from input handler and render them in taskDisplay section
+        //     let tasksToDisplay = taskHandler.returnTaskInput()
+        //     taskDisplayGp.textContent = ""
+        //     for(let i = 0; i < tasksToDisplay.length; i++){
+        //         taskDisplayGp.append(elementFactory.displaycardElement(tasksToDisplay[i]))
+        //     }
+        // })
+        
+        // })
+
+        // addProjects.addEventListener("click",() =>{
+        //     formDisplayGp.innerHTML = ""
+        //     formDisplayGp.append(Form.RenderProjectForm())
+        //     // Grab the form
+        //     const projectForm = document.getElementById('projectForm')
+        //     projectForm.addEventListener("submit", (event) => {
+        //         event.preventDefault()
+
+        //         // Get the input from user
+        //         projectHandler.getProjectInput(projectForm)
+
+        //     })
+        // })
 
     }
 

@@ -4,16 +4,27 @@ class TaskInputHandler{
         this.taskStorage = []
     }
 
-    getTaskInput(){
-        let taskName = document.getElementById('taskInput').value.trim()
-        let projectName = document.getElementById('ProjectOptions').value.trim()
-        let taskImportantLevel = document.getElementById('levelOptions').value.trim()
+    getTaskInput(form){
+        let taskName = form.querySelector('.task-input').value.trim()
+
+        let projectName = form.querySelector('.project-option').value.trim()
+        let taskImportantLevel = form.querySelector('.important-option').value.trim()
 
         // Handle due date
-        let dueDate = document.getElementById('dDate').value 
+       let dueDate = form.querySelector('.task-duedate').value 
+
+        //     // Debugging: Log these to see which one is null
+        // console.log("Input:", inputEl, "Level:", levelEl, "Date:", dateEl);
+
+        // if (!inputEl || !levelEl || !dateEl) {
+        //     console.error("One or more project form elements were not found in the DOM.");
+        //     return;
+        // }
+
         // let today = Date.today().toLocalDateString()
 
-
+        
+    
         const task = {
             taskName,
             projectName,

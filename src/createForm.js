@@ -10,15 +10,15 @@ class Form{
 
     }
     
-    static RenderTaskForm(project){
+    static RenderTaskForm(){
         this.form.innerHTML = ""
         this.form.setAttribute("action","")
         this.form.setAttribute("method","get")
         this.form.setAttribute("id","taskForm")
         this.TextInputElement()
-        this.ProjectListElement(project)
+        this.ProjectListElement()
         this.TaskImportantLevelElement()
-        this.dueDateElement()
+        this.dueDateElement("task-duedate","taskdueDate")
         this.BtnElement("Add","submit-btn","submitTaskBtn","submit")
         this.BtnElement("Clear","clear-btn","clearTaskBtn","reset")
         return this.form
@@ -31,7 +31,7 @@ class Form{
         this.form.setAttribute("id","projectForm")
         this.ProjectInputElement()
         this.TaskImportantLevelElement()
-        this.dueDateElement()
+        this.dueDateElement("project-duedate","projectDuedate")
         this.BtnElement("Add","submit-btn","submitProjectBtn","submit")
         this.BtnElement("Clear","clear-btn","clearProjectBtn","reset")
         return this.form
@@ -40,40 +40,41 @@ class Form{
     // Class for task elementp
     static TextInputElement(){
         const taskLable = elementFactory.makeFormElement("label","Task Name: ","","","taskName","","","")
-        const taskInput = elementFactory.makeFormElement("input","","","taskInput","","taskName","text",1)
+        const taskInput = elementFactory.makeFormElement("input","","task-input","taskInput","","taskName","text",1)
         this.form.append(taskLable)
         this.form.append(taskInput)
     }
 
     static ProjectInputElement(){
         const taskLable = elementFactory.makeFormElement("label","Project Name: ","","","projectName","","","")
-        const taskInput = elementFactory.makeFormElement("input","","","projectInput","","ProjectName","text",1)
+        const taskInput = elementFactory.makeFormElement("input","","project-input","projectInput","","ProjectName","text",1)
         this.form.append(taskLable)
         this.form.append(taskInput)
     }
 
-    static ProjectListElement(project){
+    static ProjectListElement(){
+                
         const ProjectLevel = elementFactory.makeFormElement("label","Choose A project:","","","projects","",0)
         
-        const optionHolder = elementFactory.makeElement("select","","","ProjectOptions")
+        const optionHolder = elementFactory.makeElement("select","","project-option","ProjectOptions")
         optionHolder.name = "projects"
 
-        let renderProjectList = []
-        // let projectHandle = new projectInputHandler()
-        // let retrunProjects = projectHandle.getProjectInput()
+        // // let projectHandle = new projectInputHandler()
+        // let renderProjectList = []
 
-        for(let i = 0; i < project.length; i++){
-            let currentProject = project[i]
-            let option = elementFactory.optionElement("option",currentProject[i].projectName,"","",currentProject[i].projectName)
-            renderProjectList.push(option)
-        }
+        // for(let i = 0; i < project.length; i++){
+        //     let currentProject = project[i]
+        //     let option = elementFactory.optionElement("option",currentProject[i].projectName,"","",currentProject[i].projectName)
+        //     renderProjectList.push(option)
+        // }
 
-        // const optionOne = elementFactory.optionElement("option","Project One","","","Project One")
-        // const optionTwo = elementFactory.optionElement("option","Project Two","","","Project Two")
-        // const optionThree = elementFactory.optionElement("option","Project Three","","","Project Three")
-        // Append to the option holder
-        // elementFactory.pushElements(optionHolder,projectLists)
-        elementFactory.pushElements(optionHolder,renderProjectList)
+        const optionOne = elementFactory.optionElement("option","Project One","","","Project One")
+        const optionTwo = elementFactory.optionElement("option","Project Two","","","Project Two")
+        const optionThree = elementFactory.optionElement("option","Project Three","","","Project Three")
+        //Append to the option holder
+        elementFactory.pushElements(optionHolder,[optionOne,optionTwo,optionThree])
+        
+        //elementFactory.pushElements(optionHolder,renderProjectList)
 
         // Append to the main Form
         this.form.append(ProjectLevel)
@@ -83,7 +84,7 @@ class Form{
     static TaskImportantLevelElement(){
         const ImportantLable = elementFactory.makeFormElement("label","Choose Urgent level:","","","importantLevel","",0)
         
-        const optionHolder = elementFactory.makeElement("select","","","levelOptions")
+        const optionHolder = elementFactory.makeElement("select","","important-option","levelOptions")
         optionHolder.name = "level"
 
         const optionOne = elementFactory.optionElement("option","Chill","","","chill")
@@ -98,9 +99,9 @@ class Form{
         this.form.append(optionHolder)        
     }
 
-    static dueDateElement(){
+    static dueDateElement(dueDateClass, dueDateId){
         const dueDateLable = elementFactory.makeFormElement("label","Due Date","","","dDate","dDate","","")
-        const dueDateInput = elementFactory.makeFormElement("input","","due-date","dDate","","","date",1)
+        const dueDateInput = elementFactory.makeFormElement("input","",dueDateClass,dueDateId,"","","date",1)
 
         const today = new Date()
         dueDateInput.min = today.toLocaleDateString()

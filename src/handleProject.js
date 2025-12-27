@@ -14,13 +14,18 @@ class projectInputHandler{
         ]
     }
 
-    getProjectInput(){
-        let projectName = document.getElementById('projectInput').value.trim()
-        let ProjectImportantLevel = document.getElementById('levelOptions').value.trim()
+    getProjectInput(form){
+        
+        let projectName = form.querySelector('.project-input').value.trim()
+        
+        let ProjectImportantLevel = form.querySelector('.important-option').value.trim()
 
         // Handle due date
-        let projectDueDate = document.getElementById('dDate').value 
+
+        let projectDueDate = form.querySelector('.project-duedate').value 
+        
         // let today = Date.today().toLocalDateString()
+
 
         const project = {
             projectName,
