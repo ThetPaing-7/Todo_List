@@ -2,6 +2,7 @@ import { elementFactory } from "./elementFactory"
 import { Darkmode } from "./switchTheme"
 import { taskDOMControll } from "./taskController"
 import { projectDOMControll } from "./projectController"
+import { projectInputHandler } from "./handleProject"
 
 class DomController{
 
@@ -38,19 +39,21 @@ class DomController{
         elementFactory.pushElements(recordBody,[addTasks,addProjects])
 
         const taskFrom = document.getElementById('taskForm')
+        
+        const taskControl = new taskDOMControll(formDisplayGp,taskDisplayGp)
+        const projectControl = new projectDOMControll(formDisplayGp,taskDisplayGp)
+        const ReturnProjectContoller = new projectInputHandler()
 
         const actionButtons = document.querySelectorAll('.add')
         actionButtons.forEach(button => button.addEventListener("click",(event)=>{
             const item = event.target.id
-
+        
             if(item === 'addTasksBtn'){
-                formDisplayGp.replaceChildren()
-                const taskControl = new taskDOMControll(formDisplayGp,taskDisplayGp)
-                taskControl.DoTaskDomStuff()
-            }else if(item === 'addProjectsBtn'){
-                formDisplayGp.replaceChildren()
-                const projectControl = new projectDOMControll(formDisplayGp,taskDisplayGp)
+                let returnProject = ReturnProjectContoller.returnProjectInput()
+                taskControl.DoTaskDomStuff(returnProject)
+            }else if(item === 'addProjectsBtn'){  
                 projectControl.DoProjectDomStuff()
+                
             }else{
                 console.log("enter A valid click")
             }

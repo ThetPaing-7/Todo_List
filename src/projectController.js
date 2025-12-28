@@ -9,26 +9,32 @@ class projectDOMControll{
         this.projectDisplay = projectDisplay
         //this.taskFrom = document.getElementById('taskForm')
     }
+    
+    projectHandler = new projectInputHandler() 
 
     DoProjectDomStuff(){
         this.formdisplay.innerHTML = ""
-        this.formdisplay.replaceWith(Form.RenderProjectForm())
+        this.formdisplay.append(Form.RenderProjectForm())
 
         let projectForm = document.getElementById("projectForm")
-        let projectHandler = new projectInputHandler()
 
         projectForm.addEventListener("submit",(event)=>{   
             event.preventDefault()
-            projectHandler.getProjectInput(projectForm) 
+            this.projectHandler.getProjectInput(projectForm) 
 
             // Get the task list from input handler and render them in taskDisplay section
-            let projectToDisplay = projectHandler.returnProjectInput()
+            let projectToDisplay = this.projectHandler.returnProjectInput()
             this.projectDisplay.textContent = ""
             for(let i = 0; i < projectToDisplay.length; i++){
                 this.projectDisplay.append(elementFactory.displaycardElement(projectToDisplay[i]))
             }
+
+            projectForm.reset()
         })
+        
     }
+
+    
 }
 
 export {projectDOMControll}

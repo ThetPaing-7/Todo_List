@@ -1,6 +1,7 @@
 import { TaskInputHandler } from "./taskInputHandler";
 import { Form } from "./createForm";
 import { elementFactory } from "./elementFactory";
+import { projectInputHandler } from "./handleProject";
 
 class taskDOMControll{
 
@@ -8,26 +9,32 @@ class taskDOMControll{
         this.formdisplay = formdisplay
         this.taskDisplay = taskDisplay
         //this.taskFrom = document.getElementById('taskForm')
+        this.taskHandler = new TaskInputHandler()
     }
 
-    DoTaskDomStuff(){
+
+    DoTaskDomStuff(returnProject){
         this.formdisplay.innerHTML = ""
-        this.formdisplay.replaceWith(Form.RenderTaskForm())
+
+        // For the debugging purpose
+        console.log(returnProject)
+
+        this.formdisplay.append(Form.RenderTaskForm(returnProject))
 
         let taskFrom = document.getElementById("taskForm")
-        let taskHandler = new TaskInputHandler()
 
         taskFrom.addEventListener("submit",(event)=>{   
             event.preventDefault()
-            taskHandler.getTaskInput(taskFrom) 
+            this.taskHandler.getTaskInput(taskFrom) 
 
             // Get the task list from input handler and render them in taskDisplay section
-            let tasksToDisplay = taskHandler.returnTaskInput()
+            let tasksToDisplay = this.taskHandler.returnTaskInput()
             this.taskDisplay.textContent = ""
             for(let i = 0; i < tasksToDisplay.length; i++){
                 this.taskDisplay.append(elementFactory.displaycardElement(tasksToDisplay[i]))
             }
         })
+
     }
 }
 

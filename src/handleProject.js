@@ -44,7 +44,7 @@ class projectInputHandler{
         let returnProject = []
 
         for(let i = 0; i < this.projectStorage.length; i++){
-            returnProject.push(Object.values(this.projectStorage))
+            returnProject.push(Object.values(this.projectStorage[i]))
         }
 
         return returnProject

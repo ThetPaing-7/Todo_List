@@ -135,8 +135,8 @@
 /* From Uiverse.io by ErzenXz */ 
 .recordGp button {
   width: fit-content;
-  min-width: 100px;
-  height: 45px;
+  width: 100px;
+  height: 5vh;
   padding: 8px;
   border-radius: 5px;
   border: 2.5px solid var(--buttonBorderColor);
