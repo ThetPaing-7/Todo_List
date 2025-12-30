@@ -53,5 +53,5 @@ class projectInputHandler{
 
 }
 
-
+export const projectReturn = new projectInputHandler()
 export {projectInputHandler}

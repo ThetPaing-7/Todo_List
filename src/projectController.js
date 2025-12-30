@@ -1,6 +1,7 @@
 import { projectInputHandler } from "./handleProject";
 import { Form } from "./createForm";
 import { elementFactory } from "./elementFactory";
+import { projectReturn } from "./handleProject";
 
 class projectDOMControll{
 
@@ -10,7 +11,7 @@ class projectDOMControll{
         //this.taskFrom = document.getElementById('taskForm')
     }
     
-    projectHandler = new projectInputHandler() 
+    //projectHandler = new projectInputHandler() 
 
     DoProjectDomStuff(){
         this.formdisplay.innerHTML = ""
@@ -20,10 +21,10 @@ class projectDOMControll{
 
         projectForm.addEventListener("submit",(event)=>{   
             event.preventDefault()
-            this.projectHandler.getProjectInput(projectForm) 
+            projectReturn.getProjectInput(projectForm) 
 
             // Get the task list from input handler and render them in taskDisplay section
-            let projectToDisplay = this.projectHandler.returnProjectInput()
+            let projectToDisplay = projectReturn.returnProjectInput()
             this.projectDisplay.textContent = ""
             for(let i = 0; i < projectToDisplay.length; i++){
                 this.projectDisplay.append(elementFactory.displaycardElement(projectToDisplay[i]))
@@ -31,10 +32,14 @@ class projectDOMControll{
 
             projectForm.reset()
         })
-        
+
+    
+    
     }
 
     
+    
 }
+
 
 export {projectDOMControll}

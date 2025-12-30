@@ -1,5 +1,6 @@
 import { elementFactory } from "./elementFactory"
 import { projectInputHandler } from "./handleProject"
+import { projectReturn } from "./handleProject"
 
 class Form{
 
@@ -7,17 +8,17 @@ class Form{
     
 
     constructor(){
-
+        
     }
     
-    static RenderTaskForm(projectLists){
+    static RenderTaskForm(){
         let form = document.createElement("form")    
         form.innerHTML = ""
         form.setAttribute("action","")
         form.setAttribute("method","get")
         form.setAttribute("id","taskForm")
         this.TextInputElement(form)
-        this.ProjectListElement(form,projectLists)
+        this.ProjectListElement(form)
         this.TaskImportantLevelElement(form)
         this.dueDateElement("task-duedate","taskdueDate",form)
         this.BtnElement("Add","submit-btn","submitTaskBtn","submit",form)
@@ -39,6 +40,8 @@ class Form{
         return form
     }
 
+
+
     // Class for task elementp
     static TextInputElement(form){
         const taskLable = elementFactory.makeFormElement("label","Task Name: ","","","taskName","","","")
@@ -54,8 +57,12 @@ class Form{
         form.append(taskInput)
     }
 
-    static ProjectListElement(form, projectLists){
-                
+    static ProjectListElement(form){
+            
+        // To retrive project 
+        
+        let projects = projectReturn.returnProjectInput()
+
         const ProjectLevel = elementFactory.makeFormElement("label","Choose A project:","","","projects","",0)
         
         const optionHolder = elementFactory.makeElement("select","","project-option","ProjectOptions")
@@ -63,9 +70,8 @@ class Form{
 
         let renderProjectList = []
 
-
-        for(let i = 0; i < projectLists.length; i++){
-            let currentProject = projectLists[i]
+        for(let i = 0; i < projects.length; i++){
+            let currentProject = projects[i]
             let option = elementFactory.optionElement("option",currentProject[0],"","",currentProject[0])
             renderProjectList.push(option)
         }

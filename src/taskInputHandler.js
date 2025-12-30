@@ -48,4 +48,5 @@ class TaskInputHandler{
 
 }
 
-export {TaskInputHandler}
+const taskInputHandle = new TaskInputHandler()
+export {taskInputHandle}

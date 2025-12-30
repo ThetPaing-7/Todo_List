@@ -28,7 +28,7 @@ class DomController{
         this.body.classList.toggle("homeBody")
         // Grab the page body
         const recordBody = elementFactory.makeElement("div","","recordGp","")
-        const formDisplayGp = elementFactory.makeElement("div","","formDisplayGp","")
+        const formDisplayGp = elementFactory.makeElement("div","","formDisplayGp","form-display")
         const taskDisplayGp = elementFactory.makeElement("div","","taskDisplayGp","")
 
         elementFactory.pushElements(this.body,[recordBody,formDisplayGp,taskDisplayGp])
@@ -40,20 +40,19 @@ class DomController{
 
         const taskFrom = document.getElementById('taskForm')
         
-        const taskControl = new taskDOMControll(formDisplayGp,taskDisplayGp)
-        const projectControl = new projectDOMControll(formDisplayGp,taskDisplayGp)
         const ReturnProjectContoller = new projectInputHandler()
+        const projectControl = new projectDOMControll(formDisplayGp,taskDisplayGp)
+        const taskControl = new taskDOMControll(formDisplayGp,taskDisplayGp)
 
         const actionButtons = document.querySelectorAll('.add')
         actionButtons.forEach(button => button.addEventListener("click",(event)=>{
             const item = event.target.id
         
             if(item === 'addTasksBtn'){
-                let returnProject = ReturnProjectContoller.returnProjectInput()
-                taskControl.DoTaskDomStuff(returnProject)
+                //let projects = ReturnProjectContoller.returnProjectInput()
+                taskControl.DoTaskDomStuff()
             }else if(item === 'addProjectsBtn'){  
                 projectControl.DoProjectDomStuff()
-                
             }else{
                 console.log("enter A valid click")
             }

@@ -2,6 +2,7 @@ import { TaskInputHandler } from "./taskInputHandler";
 import { Form } from "./createForm";
 import { elementFactory } from "./elementFactory";
 import { projectInputHandler } from "./handleProject";
+import { taskInputHandle } from "./taskInputHandler";
 
 class taskDOMControll{
 
@@ -9,33 +10,46 @@ class taskDOMControll{
         this.formdisplay = formdisplay
         this.taskDisplay = taskDisplay
         //this.taskFrom = document.getElementById('taskForm')
-        this.taskHandler = new TaskInputHandler()
     }
-
-
-    DoTaskDomStuff(returnProject){
+    
+    //projectHandler = new projectInputHandler()
+    DoTaskDomStuff(){
         this.formdisplay.innerHTML = ""
 
+        //let projectHandler = new projectInputHandler()     
+        //let returnProject = this.projectHandler.returnProjectInput()
         // For the debugging purpose
-        console.log(returnProject)
+        
 
-        this.formdisplay.append(Form.RenderTaskForm(returnProject))
+        this.formdisplay.append(Form.RenderTaskForm())
 
         let taskFrom = document.getElementById("taskForm")
 
         taskFrom.addEventListener("submit",(event)=>{   
             event.preventDefault()
-            this.taskHandler.getTaskInput(taskFrom) 
+            taskInputHandle.getTaskInput(taskFrom) 
 
             // Get the task list from input handler and render them in taskDisplay section
-            let tasksToDisplay = this.taskHandler.returnTaskInput()
+            let tasksToDisplay = taskInputHandle.returnTaskInput()
             this.taskDisplay.textContent = ""
             for(let i = 0; i < tasksToDisplay.length; i++){
                 this.taskDisplay.append(elementFactory.displaycardElement(tasksToDisplay[i]))
             }
+
+            taskFrom.reset()
         })
 
+        //this.updateTaskFormProjects()
     }
+
+    // updateTaskFormProjects() {
+    // const taskFormHolder = document.getElementById("form-display")
+
+    // taskFormHolder.innerHTML = ""
+    // taskFormHolder.append(Form.RenderTaskForm())    
+
+
+    // }
 }
 
 export {taskDOMControll}
