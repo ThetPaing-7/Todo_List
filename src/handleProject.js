@@ -44,10 +44,14 @@ class projectInputHandler{
         let returnProject = []
 
         for(let i = 0; i < this.projectStorage.length; i++){
-            returnProject.push(Object.values(this.projectStorage[i]))
+            returnProject.push(this.projectStorage[i])
         }
 
         return returnProject
+    }
+
+    remove(index){
+        this.projectStorage.splice(index,1)
     }
 
 

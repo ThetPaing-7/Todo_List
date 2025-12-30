@@ -36,10 +36,14 @@ class TaskInputHandler{
         
     }
 
+    remove(index){
+        this.taskStorage.splice(index,1)
+    }
+
     returnTaskInput(){
         let returnTasks = []
         for(let i = 0; i < this.taskStorage.length; i++){
-            returnTasks.push(Object.values(this.taskStorage[i]))
+        returnTasks.push(this.taskStorage[i])
         }
     
         return returnTasks;

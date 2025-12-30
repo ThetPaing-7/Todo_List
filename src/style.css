@@ -156,3 +156,8 @@
 .recordGp button:active {
   transform: scale(0.95);
 }
+
+/* Task card section */
+.project-card-complete{
+    background-color: #96f994;
+}
