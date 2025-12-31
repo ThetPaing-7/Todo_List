@@ -29,9 +29,19 @@ class DomController{
         // Grab the page body
         const recordBody = elementFactory.makeElement("div","","recordGp","")
         const formDisplayGp = elementFactory.makeElement("div","","formDisplayGp","form-display")
-        const taskDisplayGp = elementFactory.makeElement("div","","taskDisplayGp","")
+        const DisplayGp = elementFactory.makeElement("div","","DisplayGp","")
 
-        elementFactory.pushElements(this.body,[recordBody,formDisplayGp,taskDisplayGp])
+        // Three buttons for display gp
+        const todo = elementFactory.makeElement("button","To do...","todo-Btn","todoDisplayBtn")
+        const complete = elementFactory.makeElement("button","complete Task","complete-Btn","completeDisplayBtn")
+        const deleteTask = elementFactory.makeElement("button","delete Task","delete-display-Btn","deleteDisplayBtn")
+
+        elementFactory.pushElements(DisplayGp,[todo,complete,deleteTask])
+        
+        const taskDisplayGp = elementFactory.makeElement("div","","taskDisplayGp","")
+        elementFactory.pushElements(DisplayGp, [taskDisplayGp])
+
+        elementFactory.pushElements(this.body,[recordBody,formDisplayGp,DisplayGp])
 
         const addTasks = elementFactory.makeElement("button","Add Task","add task","addTasksBtn")
         const addProjects = elementFactory.makeElement("button","Add Project","add project","addProjectsBtn")
@@ -51,8 +61,10 @@ class DomController{
             if(item === 'addTasksBtn'){
                 //let projects = ReturnProjectContoller.returnProjectInput()
                 taskControl.DoTaskDomStuff()
+
+            
             }else if(item === 'addProjectsBtn'){  
-                projectControl.DoProjectDomStuff()
+                projectControl.DoProjectDomStuff()               
             }else{
                 console.log("enter A valid click")
             }
@@ -101,6 +113,20 @@ class DomController{
         // })
 
     }
+
+    chartPageStart(){
+        this.body.classList.toggle("chartBody")
+
+        // Make element and append to the chart
+        const projectArea = elementFactory.makeElement("div","","projectArea","")
+        const stasticArea = elementFactory.makeElement("div","","stasticArea","")
+        const chartOne = elementFactory.makeElement("div","","chartOne","")
+        const chartTwo = elementFactory.makeElement("div","","chartTwo","")
+
+        elementFactory.pushElements(this.body,[projectArea,stasticArea,chartOne,chartTwo])
+    }
+
+
 
 
 }
