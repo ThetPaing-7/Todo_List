@@ -61,8 +61,6 @@ class DomController{
             if(item === 'addTasksBtn'){
                 //let projects = ReturnProjectContoller.returnProjectInput()
                 taskControl.DoTaskDomStuff()
-
-            
             }else if(item === 'addProjectsBtn'){  
                 projectControl.DoProjectDomStuff()               
             }else{

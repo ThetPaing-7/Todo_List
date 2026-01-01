@@ -2,6 +2,8 @@ class TaskInputHandler{
 
     constructor(){
         this.taskStorage = []
+        this.softDeleteTask = []
+        this.completeTask = []
     }
 
     getTaskInput(form){
@@ -26,6 +28,7 @@ class TaskInputHandler{
         
     
         const task = {
+            id : crypto.randomUUID(),
             taskName,
             projectName,
             taskImportantLevel,
@@ -36,20 +39,56 @@ class TaskInputHandler{
         
     }
 
-    remove(index){
-        this.taskStorage.splice(index,1)
+    returnTaskInput(){    
+        return [...this.taskStorage]
     }
 
-    returnTaskInput(){
-        let returnTasks = []
-        for(let i = 0; i < this.taskStorage.length; i++){
-        returnTasks.push(this.taskStorage[i])
+
+    restore(task){
+            let index = this.softDeleteTask.findIndex( x => x.id == task.id)   
+            if(index === -1) return
+            const restoredTask = this.softDeleteTask.splice(index,1)[0]
+            this.taskStorage.push(restoredTask)
+    }
+
+        remove(task){
+            let index = this.taskStorage.findIndex(x => x.id == task.id)
+            if(index === -1) return
+            
+            let removeObject = this.taskStorage.splice(index,1)[0]
+            this.softDeleteTask.push(removeObject)
         }
-    
-        return returnTasks;
-    }
+
+        removeFromCompletetask(task){
+            const index = this.completeTask.findIndex(x => x.id == task.id)
+            if(index === -1) return
+
+            const removed = this.completeTask.splice(index,1)[0]
+            this.softDeleteTask.push(removed)
+        }
+
+        complete(task){
+
+           const index = this.taskStorage.findIndex(x => x.id == task.id)
+           if(index === -1) return
+
+           const removed = this.taskStorage.splice(index,1)[0]
+           this.completeTask.push(removed)
+        }
 
 
+        uncomplete(task) {
+            const index = this.completeTask.findIndex(x => x.id == task.id)
+            if(index === -1) return
+
+            const removed = this.completeTask.splice(index,1)[0]
+            this.taskStorage.push(removed)
+        }
+
+        deletePermanent(task){
+            let index = this.softDeleteTask.findIndex(x => x.id == task.id)
+            this.softDeleteTask.splice(index,1)
+        }
 }
 
 const taskInputHandle = new TaskInputHandler()

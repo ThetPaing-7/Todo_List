@@ -1,22 +1,24 @@
 class projectInputHandler{
     constructor(){
         this.projectStorage = [
-            // {
-            //     projectName: "Odin Project",
-            //     ProjectImportantLevel: "Chill",
-            //     projectDueDate: "12/26/2026"
-            // },
-            // {
-            //     projectName: "CS50",
-            //     ProjectImportantLevel: "Urgent",
-            //     projectDueDate: "11/12/2026"
-            // },
+            {
+                id : "123-456-783-343",
+                projectName: "Odin Project",
+                ProjectImportantLevel: "Chill",
+                projectDueDate: "12/26/2026"
+            },
+            {   id : "234-567-234-123",
+                projectName: "CS50",
+                ProjectImportantLevel: "Urgent",
+                projectDueDate: "11/12/2026"
+            },
 
-            // {
-            //     projectName: "Personal Portfolio",
-            //     ProjectImportantLevel: "Urgent",
-            //     projectDueDate: "01/15/2026"
-            // },
+            {
+                id: "234-643-456-789",
+                projectName: "Personal Portfolio",
+                ProjectImportantLevel: "Urgent",
+                projectDueDate: "01/15/2026"
+            },
             // {
             //     projectName: "E-Commerce Dashboard",
             //     ProjectImportantLevel: "Medium",
@@ -93,6 +95,14 @@ class projectInputHandler{
             let removeObject = this.projectStorage.splice(index,1)[0]
             this.softDeleteProject.push(removeObject)
             console.log(this.softDeleteProject)
+        }
+
+        removeFromCompletetask(project){
+            const index = this.completeProject.findIndex(x => x.id == project.id)
+            if(index === -1) return
+
+            const removed = this.completeProject.splice(index,1)[0]
+            this.softDeleteProject.push(removed)
         }
 
         complete(project){

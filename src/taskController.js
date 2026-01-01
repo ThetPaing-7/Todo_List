@@ -18,14 +18,9 @@ class taskDOMControll{
     //projectHandler = new projectInputHandler()
     DoTaskDomStuff(){
         this.formdisplay.innerHTML = ""
-        
-        //let projectHandler = new projectInputHandler()     
-        //let returnProject = this.projectHandler.returnProjectInput()
-        // For the debugging purpose
-        
-
         this.formdisplay.append(Form.RenderTaskForm())
 
+        this.renderTask()
         let taskFrom = document.getElementById("taskForm")
 
         taskFrom.addEventListener("submit",(event)=>{   
@@ -33,13 +28,28 @@ class taskDOMControll{
             taskInputHandle.getTaskInput(taskFrom) 
             taskFrom.reset()
             
-            this.renderTaks()
+            this.renderTask()
         })
 
+        const todoTaskDisplay = document.getElementById("todoDisplayBtn")
+        const completeTaskDisplay = document.getElementById("completeDisplayBtn")
+        const deletedTaskDisplay = document.getElementById("deleteDisplayBtn")
+
+        todoTaskDisplay.addEventListener("click",() =>{
+            this.renderTask()
+        })
+
+        completeTaskDisplay.addEventListener("click",() =>{
+            this.renderCompleteTask()
+        })
+
+        deletedTaskDisplay.addEventListener("click", () => {
+            this.renderDeletedTask()
+        })
 
     }
 
-    renderTaks(){
+    renderTask(){
         this.taskDisplay.innerHTML = ""
 
         const tasks = taskInputHandle.returnTaskInput()
@@ -50,9 +60,46 @@ class taskDOMControll{
 
             const check = document.createElement("input")
             check.type = "checkbox"
-            check.addEventListener("change",() => {
-            card.classList.toggle("task-card-complete")
+            this.checkStatusTask(check,task)
 
+            const title = document.createElement("p")
+            title.textContent = task.taskName
+
+            const project = document.createElement("h3")
+            project.textContent = task.projectName
+
+            const priority = document.createElement("p")
+            priority.textContent = task.taskImportantLevel
+
+            const dueDate = document.createElement("p")
+            dueDate.textContent = task.dueDate
+
+            const deleteBtn = document.createElement("button")
+            deleteBtn.textContent = "Delete"
+
+            deleteBtn.addEventListener("click", () => {
+                this.SoftDeletetask(task)
+            })
+
+            elementFactory.pushElements(card,[check,title,project,dueDate,priority,deleteBtn])
+            this.taskDisplay.append(card)
+        })
+    }
+
+
+     renderCompleteTask(){
+        this.taskDisplay.innerHTML = ""
+
+        const tasks = taskInputHandle.completeTask
+
+        tasks.forEach((task, index) => {
+            const card = document.createElement("div")
+            card.classList.add("task-card")
+
+            const check = document.createElement("button")
+            check.textContent = "Uncomplete"
+            check.addEventListener("click",() => {
+                this.completeTask(task)
             })
 
             const title = document.createElement("p")
@@ -71,7 +118,7 @@ class taskDOMControll{
             deleteBtn.textContent = "Delete"
 
             deleteBtn.addEventListener("click", () => {
-                this.deleteTask(index)
+                this.deleteCompleteTask(task)
             })
 
             elementFactory.pushElements(card,[check,title,project,dueDate,priority,deleteBtn])
@@ -79,12 +126,84 @@ class taskDOMControll{
         })
     }
 
-    deleteTask(index){
-        taskInputHandle.remove(index)
-        this.renderTaks()
-        console.log(taskInputHandle.returnTaskInput())
+
+
+     renderDeletedTask(){
+        this.taskDisplay.innerHTML = ""
+
+        const tasks = taskInputHandle.softDeleteTask
+
+        tasks.forEach((task, index) => {
+            const card = document.createElement("div")
+            card.classList.add("task-card")
+
+            const check = document.createElement("button")
+            check.textContent = "Restore"
+            check.addEventListener("click", () => {
+                this.restoreTask(task)
+            })
+
+            const title = document.createElement("p")
+            title.textContent = task.taskName
+
+            const project = document.createElement("h3")
+            project.textContent = task.projectName
+
+            const priority = document.createElement("p")
+            priority.textContent = task.taskImportantLevel
+
+            const dueDate = document.createElement("p")
+            dueDate.textContent = task.dueDate
+
+            const deleteBtn = document.createElement("button")
+            deleteBtn.textContent = "Delete"
+
+            deleteBtn.addEventListener("click", () => {
+                this.permantlyDeleteTask(task)
+            })
+
+            elementFactory.pushElements(card,[check,title,project,dueDate,priority,deleteBtn])
+            this.taskDisplay.append(card)
+        })
     }
 
+    checkStatusTask(check,task){
+            check.addEventListener("change", () => {
+                if (check.checked) {
+                    taskInputHandle.complete(task)
+                    this.renderTask()
+                }
+            }
+    )}
+    
+    
+        completeTask(project){
+            taskInputHandle.uncomplete(project)
+            this.renderCompleteTask()
+        }
+    
+        SoftDeletetask(project){
+            taskInputHandle.remove(project)
+            this.renderTask()
+            //console.log(`soft Delete project" ${projects}`)
+        }
+    
+        // Restore Project
+        restoreTask(project){
+            taskInputHandle.restore(project)
+            this.renderTask()
+        }
+    
+        permantlyDeleteTask(project){
+            taskInputHandle.deletePermanent(project)
+            this.renderDeletedTask()
+        }
+
+        deleteCompleteTask(project){
+            taskInputHandle.removeFromCompletetask(project)
+            this.renderCompleteTask()
+
+        }
 
     
 }

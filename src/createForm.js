@@ -72,7 +72,7 @@ class Form{
 
         for(let i = 0; i < projects.length; i++){
             let currentProject = projects[i]
-            let option = elementFactory.optionElement("option",currentProject[0],"","",currentProject[0])
+            let option = elementFactory.optionElement("option",currentProject.projectName,"","",currentProject.projectName)
             renderProjectList.push(option)
         }
 

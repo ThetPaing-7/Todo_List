@@ -91,7 +91,7 @@ class projectDOMControll{
 
         const projects = projectReturn.completeProject
 
-        projects.forEach((project, index) => {
+        projects.forEach((project) => {
             const card = document.createElement("div")
             card.classList.add("project-card")
 
@@ -114,7 +114,7 @@ class projectDOMControll{
             deleteBtn.textContent = "Delete"
 
             deleteBtn.addEventListener("click", () => {
-                this.SoftDeleteProject(project)
+                this.deleteCompleteTask(project)
             })
 
             elementFactory.pushElements(card,[check,projectTitle,dueDate,priority,deleteBtn])
@@ -173,6 +173,15 @@ class projectDOMControll{
         this.renderCompleteProject()
     }
 
+    removeFromCompletetask(task){
+            const index = this.completeTask.findIndex(x => x.id == task.id)
+            if(index === -1) return
+
+            const removed = this.completeTask.splice(index,1)[0]
+            this.softDeleteTask.push(removed)
+    }
+    
+
     SoftDeleteProject(index){
         projectReturn.remove(index)
         this.renderProjects()
@@ -185,11 +194,17 @@ class projectDOMControll{
         this.renderProjects()
     }
 
-    permantlyDeleteProject(index){
-        projectReturn.deletePermanent(index)
+    permantlyDeleteProject(project){
+        projectReturn.deletePermanent(project)
         this.renderDeletedProject()
     }
     
+    deleteCompleteTask(project){
+            projectReturn.removeFromCompletetask(project)
+            this.renderCompleteProject()
+
+    }
+
 }
 
 
