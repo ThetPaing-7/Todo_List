@@ -175,12 +175,12 @@
 
 .projectArea{
     grid-area: 2 / 1 / 6 / 2;
-    background-color: #8EC3B0;
+    background-color: #33b384;
 }
 
 .stasticArea{
     grid-area: 1 / 1 / 2 / 2;
-    background-color: #96f994;
+    background-color: #295b28;
 }
 
 .chartOne{

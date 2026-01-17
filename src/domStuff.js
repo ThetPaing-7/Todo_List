@@ -3,6 +3,7 @@ import { Darkmode } from "./switchTheme"
 import { taskDOMControll } from "./taskController"
 import { projectDOMControll } from "./projectController"
 import { projectInputHandler } from "./handleProject"
+import { ChartFactory } from "./chartFactory"
 
 class DomController{
 
@@ -25,7 +26,9 @@ class DomController{
     }
 
     homePageStart(){
-        this.body.classList.toggle("homeBody")
+        this.body.innerHTML = ""
+        this.body.classList.remove("chartBody")
+        this.body.classList.add("homeBody")
         // Grab the page body
         const recordBody = elementFactory.makeElement("div","","recordGp","")
         const formDisplayGp = elementFactory.makeElement("div","","formDisplayGp","form-display")
@@ -113,7 +116,10 @@ class DomController{
     }
 
     chartPageStart(){
-        this.body.classList.toggle("chartBody")
+        this.body.innerHTML =""
+        
+        this.body.classList.remove("homeBody")
+        this.body.classList.add("chartBody")
 
         // Make element and append to the chart
         const projectArea = elementFactory.makeElement("div","","projectArea","")
@@ -122,6 +128,14 @@ class DomController{
         const chartTwo = elementFactory.makeElement("div","","chartTwo","")
 
         elementFactory.pushElements(this.body,[projectArea,stasticArea,chartOne,chartTwo])
+
+        // Testing
+        const drawPaper = elementFactory.makeElement("canvas","","","testChart")
+        chartOne.append(drawPaper)
+        
+        let chart = new ChartFactory()
+        chart.Barchart()
+
     }
 
 
