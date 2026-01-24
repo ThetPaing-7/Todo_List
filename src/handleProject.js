@@ -11,7 +11,7 @@ class projectInputHandler{
                 projectName: "CS50",
                 ProjectImportantLevel: "Urgent",
                 projectDueDate: "11/12/2026"
-            },
+        },
 
             {
                 id: "234-643-456-789",

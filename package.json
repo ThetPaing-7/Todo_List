@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/ThetPaing-7/Todo_List#readme",
   "devDependencies": {
+    "chart.js": "^4.5.1",
     "css-loader": "^7.1.2",
     "html-webpack-plugin": "^5.6.5",
     "style-loader": "^4.0.0",

@@ -4,6 +4,7 @@ import { taskDOMControll } from "./taskController"
 import { projectDOMControll } from "./projectController"
 import { projectInputHandler } from "./handleProject"
 import { ChartFactory } from "./chartFactory"
+import { taskInputHandle } from "./taskInputHandler"
 
 class DomController{
 
@@ -122,20 +123,26 @@ class DomController{
         this.body.classList.add("chartBody")
 
         // Make element and append to the chart
-        const projectArea = elementFactory.makeElement("div","","projectArea","")
-        const stasticArea = elementFactory.makeElement("div","","stasticArea","")
+        const chartThree = elementFactory.makeElement("div","","chartThree","")
+        const chartFour = elementFactory.makeElement("div","","chartFour","")
         const chartOne = elementFactory.makeElement("div","","chartOne","")
         const chartTwo = elementFactory.makeElement("div","","chartTwo","")
+        const stasticsSwitchBtn = elementFactory.makeElement("div","","stasticsSwitchBtn","")
+        const stasticsData = elementFactory.makeElement("div","","stasticsData","")
 
-        elementFactory.pushElements(this.body,[projectArea,stasticArea,chartOne,chartTwo])
+        elementFactory.pushElements(this.body,[chartOne,chartTwo,chartThree,chartFour,stasticsSwitchBtn,stasticsData])
 
-        // Testing
+        // Create Two buttons for switch between tasks and project stastics
+        const label = elementFactory.makeElement("h2","Switch to","","")
+        const tasksStatics = elementFactory.makeElement("div","Tasks","tasks-stastic-btn","tasksStatsicBtn")
+        const projectStatics = elementFactory.makeElement("div","Projects","projects-statics-btn","projectStasticsBtn")
+
+        // Testing for chart
         const drawPaper = elementFactory.makeElement("canvas","","","testChart")
         chartOne.append(drawPaper)
         
         let chart = new ChartFactory()
         chart.Barchart()
-
     }
 
 
