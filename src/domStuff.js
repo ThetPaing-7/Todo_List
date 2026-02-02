@@ -2,8 +2,9 @@ import { elementFactory } from "./elementFactory"
 import { Darkmode } from "./switchTheme"
 import { taskDOMControll } from "./taskController"
 import { projectDOMControll } from "./projectController"
-import { projectInputHandler } from "./handleProject"
+import { projectInputHandle } from "./handleProject"
 import { ChartFactory } from "./chartFactory"
+import { Statcis } from "./taskStastics"
 import { taskInputHandle } from "./taskInputHandler"
 
 class DomController{
@@ -54,7 +55,7 @@ class DomController{
 
         const taskFrom = document.getElementById('taskForm')
         
-        const ReturnProjectContoller = new projectInputHandler()
+        //const ReturnProjectContoller = new projectInputHandle()
         const projectControl = new projectDOMControll(formDisplayGp,taskDisplayGp)
         const taskControl = new taskDOMControll(formDisplayGp,taskDisplayGp)
 
@@ -134,16 +135,80 @@ class DomController{
 
         // Create Two buttons for switch between tasks and project stastics
         const label = elementFactory.makeElement("h2","Switch to","","")
-        const tasksStatics = elementFactory.makeElement("div","Tasks","tasks-stastic-btn","tasksStatsicBtn")
-        const projectStatics = elementFactory.makeElement("div","Projects","projects-statics-btn","projectStasticsBtn")
-
-        // Testing for chart
-        const drawPaper = elementFactory.makeElement("canvas","","","testChart")
-        chartOne.append(drawPaper)
+        const tasksStatics = elementFactory.makeElement("button","Tasks","tasks-stastic-btn","tasksStatsicBtn")
+        const projectStatics = elementFactory.makeElement("button","Projects","projects-statics-btn","projectStasticsBtn")
         
-        let chart = new ChartFactory()
-        chart.Barchart()
+        elementFactory.pushElements(stasticsSwitchBtn,[label,tasksStatics,projectStatics])
+
+        
+        stasticsSwitchBtn.addEventListener("click",(event) => {
+            
+            
+            if(event.target.tagName != "BUTTON") return
+            
+            switch(event.target.id){
+                case "tasksStatsicBtn":
+                chartOne.innerHTML = ""
+                let taskChart = new ChartFactory()
+                console.log("Task Has been switch")
+
+                let tasks = taskInputHandle.returnTaskInput()
+                let completeTasks = taskInputHandle.returnCompleteTask()
+                let softDeleteTasks = taskInputHandle.returnSoftDeleteTask()
+
+                const stasticTaskObject = new Statcis(tasks,completeTasks,softDeleteTasks)
+                this.StaticsStart(chartOne,chartTwo,chartThree,chartFour,stasticTaskObject,taskChart)
+
+                break;
+            
+            case "projectStasticsBtn":
+                chartOne.innerHTML = "";
+                console.log("Project has been switched")
+                let projectChart = new ChartFactory()
+                let projects = projectInputHandle.returnProjectInput()
+                let completeProject = projectInputHandle.retrunCompleteProject()
+                let softDeleteProject = projectInputHandle.returnSoftDeleteProject()
+
+                const stasticProjectObject = new Statcis(projects,completeProject,softDeleteProject)
+                this.StaticsStart(chartOne,chartTwo,chartThree,chartFour,stasticProjectObject,projectChart)
+                break;
+            
+            default:
+                console.log("Hello")
+                break;
+            }
+        
+        })
+        // Chart Initialize
+        // Testing for chart
+        }
+
+    StaticsStart(chartOne,chartTwo,chartThree,chartFour,stasticObject,chart){
+
+        // Overview Stastic
+        const drawPaperOne = elementFactory.makeElement("canvas","","chart-container","")
+        chartOne.append(drawPaperOne)
+
+        const { labels : labelOfChart, data: dataOfChart } = stasticObject.OverViewAnalysis()
+        console.log(labelOfChart,dataOfChart)
+        chart.Barchart(drawPaperOne, labelOfChart, dataOfChart)
+
+        const drawPaperTwo = elementFactory.makeElement("canvas","","chart-container","")
+        chartThree.append(drawPaperTwo)
+        const{labels: labelOfPriority, data: dataOfPriority} = stasticObject.importantLevelAnalysis()
+        console.log(labelOfPriority,dataOfPriority)
+        chart.DoughnutChart(drawPaperTwo,labelOfPriority,dataOfPriority)
+
+        const drawPaperThree = elementFactory.makeElement("canvas","","chart-container","")
+        chartFour.append(drawPaperThree)
+        const{labels: labelOfDueBaseAnalysis, data: dataOfDueBaseAnalysis} = stasticObject.dueDateBasesAnalysis()
+        chart.lineChart(drawPaperThree,labelOfDueBaseAnalysis,dataOfDueBaseAnalysis)
+        
+
+        // Important Level Stastice
     }
+
+
 
 
 

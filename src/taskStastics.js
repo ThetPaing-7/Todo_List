@@ -1,28 +1,29 @@
 import { taskInputHandle } from "./taskInputHandler";
 import { DateHelper } from "./dateHelper";
 
-class TaskStatcis{
-    constructor(){
-        this.tasks = taskInputHandle.returnTaskInput()
-        this.completeTasks = taskInputHandle.returnCompleteTask()
-        this.softDeleteTasks = taskInputHandle.returnSoftDeleteTask()
+class Statcis{
+    constructor(tasks, completeTasks, softDeleteTasks){
+        this.tasks = tasks,
+        this.completeTasks = completeTasks,
+        this.softDeleteTasks = softDeleteTasks,
+        this.totalTasks = this.tasks.length + this.completeTasks.length + this.softDeleteTasks.length
     }
 
     OverViewAnalysis(){
        const stats = {
-            total: this.tasks.length,
+            total: this.totalTasks,
             completed: this.completeTasks.length,
             softDeleted: this.softDeleteTasks.length,
        }
 
-       stats.active = stats.total - stats.completed - stats.softDeleted;
+       stats.active = stats.total - (stats.completed + stats.softDeleted);
 
        return{
         labels: [
             "Total Tasks",
             "Completed Tasks",
+            "Soft-deleted Tasks",
             "Active Tasks",
-            "Soft-deleted Tasks"
         ],
 
         data:Object.values(stats)
@@ -31,12 +32,12 @@ class TaskStatcis{
 
     importantLevelAnalysis(){
         // Grouping the task by the important level
-        const taskLevelGroups = Object.groupBy(this.tasks,({taskImportantLevel}) => taskImportantLevel)
+    const taskLevelGroups = Object.groupBy(this.tasks,({taskImportantLevel}) => taskImportantLevel)
 
     const stats = {
-            chill : taskLevelGroups.chill.length,
-            important: taskLevelGroups.Important.length,
-            urgent: taskLevelGroups.Urgent
+            Chill : taskLevelGroups.Chill.length,
+            Important: taskLevelGroups.Important.length,
+            Urgent: taskLevelGroups.Urgent.length
         }
 
         return{
@@ -57,6 +58,13 @@ class TaskStatcis{
             value: Object.keys(taskGroupByProject),
             data: Object.values(taskGroupByProject)
         }
+    }
+
+    test(){
+        return(
+             [1,2]
+        )   
+           
     }
 
     dueDateBasesAnalysis(){
@@ -100,6 +108,7 @@ class TaskStatcis{
     };
 
     }
-
     
 }
+
+export {Statcis}

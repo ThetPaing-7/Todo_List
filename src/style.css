@@ -8,7 +8,7 @@
 
 :root {
     --bgColor: #F3F8FF;
-    --primaryColor: #8EC3B0;
+    --primaryColor: rgba(52, 58, 174, 0.953);
     --baseVariant: #FFFFFF;
     --headerColor: #8EC3B0;
     --databgColor: #F3F8FF;
@@ -170,8 +170,11 @@
     height: 100vh;  
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(2,50%);
-    grid-template-rows: repeat(7,1fr);
+    grid-template-columns: repeat(2,1fr);
+    grid-template-rows:
+    minmax(50px, 80px)
+    repeat(6, minmax(25px, 1fr))
+    repeat(6, minmax(25px, 1fr))
 }
 
 .stasticsSwitchBtn{
@@ -184,25 +187,43 @@
     background-color: #4b2bc9;
 }
 
-
+canvas{
+    display: block;
+    max-width: 100% !important;
+    max-width: 100% !important;
+}
 .chartThree{
-    grid-area: 5 / 1 / 8 / 2;
+    grid-area: 8 / 1 / 13 / 2;
     background-color: #33b384;
 }
 
 .chartFour{
-    grid-area: 2 / 1 / 5 / 2;
+    grid-area: 2 / 1 / 8 / 2;
     background-color: #295b28;
 }
 
 .chartOne{
-    grid-area: 2 / 2 / 5 / 3;
+    grid-area: 2 / 2 / 8 / 3;
     background-color: #9aeac7;
 }
 
 .chartTwo{
-    grid-area: 5 / 2 / 8 / 3 ;
+    grid-area: 8 / 2 / 13 / 3 ;
     background-color: #EA9ABB;
 }
+
+.chartOne, .chartTwo, .chartThree, .chartFour{
+    overflow: auto;
+    position: relative;
+}
+
+.chart-container {
+    position: relative; /* Required for Chart.js responsiveness */
+    height: 100%;       /* Fill the grid cell */
+    width: 100%;        /* Fill the grid cell */
+    overflow: hidden;   /* Prevents the chart from pushing the grid boundaries */
+}
+
+
 
 

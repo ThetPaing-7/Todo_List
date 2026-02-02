@@ -80,6 +80,13 @@ class projectInputHandler{
         return [...this.projectStorage]
     }
 
+    retrunCompleteProject(){
+        return[...this.completeProject]
+    }
+
+    returnSoftDeleteProject(){
+        return[...this.softDeleteProject]
+    }
 
         restore(project){
             let index = this.softDeleteProject.findIndex( x => x.id == project.id)   
@@ -134,5 +141,6 @@ class projectInputHandler{
 
 }
 
+const projectInputHandle = new projectInputHandler()
 export const projectReturn = new projectInputHandler()
-export {projectInputHandler}
+export {projectInputHandle}

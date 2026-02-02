@@ -48,7 +48,7 @@ class TaskInputHandler{
             id: "d9b2d63d-a233-41a9-a3fc-123456789abc",
             taskName: "Conduct User Interviews",
             projectName: "UX Research",
-            taskImportantLevel: "Medium",
+            taskImportantLevel: "Important",
             dueDate: "2026-02-12"
         },
         {
@@ -72,7 +72,6 @@ class TaskInputHandler{
             taskImportantLevel: "Chill",
             dueDate: "2026-02-01"
         }
-
         ]
         this.softDeleteTask = []
         this.completeTask = []
