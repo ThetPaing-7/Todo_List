@@ -30,7 +30,7 @@ class ChartFactory{
         
     }
 
-    Barchart(canvas,labels,data){
+    Barchart(canvas,labels,data,aixs){
         new Chart(canvas, {
             type: 'bar',
             data: {
@@ -49,6 +49,7 @@ class ChartFactory{
             }]
             },
             options: {
+                indexAxis: aixs,
                 responsive: true,
                 maintainAspectRatio: false,
             scales: {
@@ -109,7 +110,7 @@ class ChartFactory{
             data: {
                 labels: label,
                 datasets:[{
-                    label: "By Dates",
+                    label: "Total Project",
                     data: data
                 }]
             },

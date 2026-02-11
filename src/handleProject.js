@@ -1,46 +1,22 @@
 class projectInputHandler{
     constructor(){
         this.projectStorage = [
-            {
-                id : "123-456-783-343",
-                projectName: "Odin Project",
-                ProjectImportantLevel: "Chill",
-                projectDueDate: "12/26/2026"
-            },
-            {   id : "234-567-234-123",
-                projectName: "CS50",
-                ProjectImportantLevel: "Urgent",
-                projectDueDate: "11/12/2026"
-        },
-
-            {
-                id: "234-643-456-789",
-                projectName: "Personal Portfolio",
-                ProjectImportantLevel: "Urgent",
-                projectDueDate: "01/15/2026"
-            },
-            // {
-            //     projectName: "E-Commerce Dashboard",
-            //     ProjectImportantLevel: "Medium",
-            //     projectDueDate: "02/20/2026"
-            // },
-            // {
-            //     projectName: "AI Chatbot Integration",
-            //     ProjectImportantLevel: "Urgent",
-            //     projectDueDate: "03/10/2026"
-            // },
-            // {
-            //     projectName: "Habit Tracker App",
-            //     ProjectImportantLevel: "Chill",
-            //     projectDueDate: "04/05/2026"
-            // },
-            // {
-            //     projectName: "Recipe Finder API",
-            //     ProjectImportantLevel: "Medium",
-            //     projectDueDate: "05/18/2026"
-            // }
-
- ]
+    { id: "123-456-783-343", projectName: "Odin Project", ProjectImportantLevel: "Chill", projectDueDate: "2026-02-20" },
+    { id: "234-567-234-123", projectName: "CS50", ProjectImportantLevel: "Urgent", projectDueDate: "2026-02-20" },
+    { id: "234-643-456-789", projectName: "Personal Portfolio", ProjectImportantLevel: "Urgent", projectDueDate: "2026-02-20" },
+    { id: "234-641-356-789", projectName: "E-Commerce Dashboard", ProjectImportantLevel: "Important", projectDueDate: "2026-02-20" },
+    // New projects added from taskStorage
+    { id: "prj-550e-8400", projectName: "E-Commerce Suite", ProjectImportantLevel: "Chill", projectDueDate: "2026-02-15" },
+    { id: "prj-1b9d-6bcd", projectName: "Marketing Q1", ProjectImportantLevel: "Urgent", projectDueDate: "2026-01-30" },
+    { id: "prj-6ec0-bd7f", projectName: "Cloud Migration", ProjectImportantLevel: "Important", projectDueDate: "2026-01-25" },
+    { id: "prj-7472-30c9", projectName: "HR Operations", ProjectImportantLevel: "Urgent", projectDueDate: "2026-02-10" },
+    { id: "prj-a1b2-c3d4", projectName: "Mobile App v2", ProjectImportantLevel: "Chill", projectDueDate: "2026-01-28" },
+    { id: "prj-f47a-c10b", projectName: "Backend Core", ProjectImportantLevel: "Important", projectDueDate: "2026-02-05" },
+    { id: "prj-d9b2-d63d", projectName: "UX Research", ProjectImportantLevel: "Important", projectDueDate: "2026-02-12" },
+    { id: "prj-9876-5432", projectName: "Landing Page", ProjectImportantLevel: "Important", projectDueDate: "2026-02-20" },
+    { id: "prj-bcde-fabc", projectName: "Compliance 2026", ProjectImportantLevel: "Urgent", projectDueDate: "2026-01-22" },
+    { id: "prj-2468-ace0", projectName: "DevOps Setup", ProjectImportantLevel: "Chill", projectDueDate: "2026-02-01" }
+];
 
         // To store delete project
         this.softDeleteProject = []

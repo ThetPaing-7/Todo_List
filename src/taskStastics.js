@@ -1,5 +1,6 @@
 import { taskInputHandle } from "./taskInputHandler";
 import { DateHelper } from "./dateHelper";
+import { projectInputHandle } from "./handleProject";
 
 class Statcis{
     constructor(tasks, completeTasks, softDeleteTasks){
@@ -7,6 +8,23 @@ class Statcis{
         this.completeTasks = completeTasks,
         this.softDeleteTasks = softDeleteTasks,
         this.totalTasks = this.tasks.length + this.completeTasks.length + this.softDeleteTasks.length
+    }
+
+    taskStastics(){
+        const total = this.totalTasks;
+        const active = total - (this.completeTasks + this.softDeleteTasks)
+
+        if(total == 0){
+            return{completePercentage: 0, uncompletePercentage: 0}
+        }
+
+        const completePercentage = Math.round(
+            (this.completeTasks.length / total ) * 100
+        )
+
+        const uncompletePercentage = 100 - completePercentage
+        
+        return{completePercentage,uncompletePercentage}
     }
 
     OverViewAnalysis(){
@@ -32,12 +50,12 @@ class Statcis{
 
     importantLevelAnalysis(){
         // Grouping the task by the important level
-    const taskLevelGroups = Object.groupBy(this.tasks,({taskImportantLevel}) => taskImportantLevel)
+    const Groups = Object.groupBy(this.tasks,(item) => item.ProjectImportantLevel || item.taskImportantLevel )
 
     const stats = {
-            Chill : taskLevelGroups.Chill.length,
-            Important: taskLevelGroups.Important.length,
-            Urgent: taskLevelGroups.Urgent.length
+            Chill : Groups.Chill?.length ?? 0,
+            Important: Groups.Important?.length ?? 0,
+            Urgent: Groups.Urgent?.length ?? 0
         }
 
         return{
@@ -52,13 +70,27 @@ class Statcis{
     }
 
     projectWiseAnalysis(){
-        const taskGroupByProject = Object.groupBy(this.tasks,({projectName}) => projectName )
+        let returnValue = Object.values(this.tasks.reduce((acc, task) => {
+            const { projectName } = task
+            if(!acc[projectName]){
+                acc[projectName] = { name: projectName, count: 0}
+            }
+            acc[projectName].count++
+            return acc
+        },{}))
 
-        return{
-            value: Object.keys(taskGroupByProject),
-            data: Object.values(taskGroupByProject)
+        let label = []
+        let data = []
+
+        for(let i = 0; i < returnValue.length; i++){
+            label.push(returnValue[i].name)
+            data.push(returnValue[i].count)
         }
+
+        return {label,data}
+        
     }
+
 
     test(){
         return(
@@ -79,7 +111,8 @@ class Statcis{
         }
 
         this.tasks.forEach( task => {
-            if(!task.dueDate || task.stats === "complete") return;
+            let due = task.dueDate || task.projectDueDate
+            if(!due || task.stats === "complete") return;
 
             const dueDate = new Date(task.dueDate)
 

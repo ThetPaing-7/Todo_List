@@ -145,10 +145,18 @@ class DomController{
             
             
             if(event.target.tagName != "BUTTON") return
+            let names = [stasticsData,chartOne,chartTwo,chartThree,chartFour]
             
             switch(event.target.id){
                 case "tasksStatsicBtn":
-                chartOne.innerHTML = ""
+
+
+                // clean the charts
+                //let names = [chartOne,chartTwo,chartThree,chartFour]
+                for(let i = 0; i < names.length; i++){
+                    names[i].innerHTML = ""
+                }
+
                 let taskChart = new ChartFactory()
                 console.log("Task Has been switch")
 
@@ -157,12 +165,25 @@ class DomController{
                 let softDeleteTasks = taskInputHandle.returnSoftDeleteTask()
 
                 const stasticTaskObject = new Statcis(tasks,completeTasks,softDeleteTasks)
+
+                // to display percentage
+                const{completePercentage: complete = 0,uncompletePercentage: uncomplete = 0} = stasticTaskObject.taskStastics()
+                let completeRateHolder = elementFactory.makeElement("div","Complete Rate :","complete-rate-holder","")
+                let completeRate = elementFactory.makeElement("div",complete,"complete-rate-holder","")
+                
+                let uncompleteRateHolder = elementFactory.makeElement("div","Uncomplete Rate :","uncomplete-rate-holder","")
+                let uncompleteRate = elementFactory.makeElement("div",uncomplete,"uncomplete-rate-holder","")
+                
+                elementFactory.pushElements(stasticsData,[completeRateHolder,completeRate,uncompleteRateHolder,uncompleteRate])
+
                 this.StaticsStart(chartOne,chartTwo,chartThree,chartFour,stasticTaskObject,taskChart)
 
                 break;
             
             case "projectStasticsBtn":
-                chartOne.innerHTML = "";
+                for(let i = 0; i < names.length; i++){
+                    names[i].innerHTML = ""
+                }
                 console.log("Project has been switched")
                 let projectChart = new ChartFactory()
                 let projects = projectInputHandle.returnProjectInput()
@@ -170,6 +191,18 @@ class DomController{
                 let softDeleteProject = projectInputHandle.returnSoftDeleteProject()
 
                 const stasticProjectObject = new Statcis(projects,completeProject,softDeleteProject)
+
+                // to display percentage
+                const{completePercentage: projectComplete = "0",uncompletePercentage: projectUncomplete = "0"} = stasticProjectObject.taskStastics()
+                let projectCompleteRateHolder = elementFactory.makeElement("div","Complete Rate: ","complete-rate-holder","")
+                let projectCompleteRate = elementFactory.makeElement("div",complete,"complete-rate-holder","")
+                
+                let projectUncompleteRateHolder = elementFactory.makeElement("div","Uncomplete Rate: ","uncomplete-rate-holder","")
+                let projectUncompleteRate = elementFactory.makeElement("div",uncomplete,"uncomplete-rate-holder","")
+                
+                elementFactory.pushElements(stasticsData,[projectCompleteRateHolder,projectComplete,projectUncompleteRateHolder,projectUncomplete])
+
+
                 this.StaticsStart(chartOne,chartTwo,chartThree,chartFour,stasticProjectObject,projectChart)
                 break;
             
@@ -188,10 +221,9 @@ class DomController{
         // Overview Stastic
         const drawPaperOne = elementFactory.makeElement("canvas","","chart-container","")
         chartOne.append(drawPaperOne)
-
         const { labels : labelOfChart, data: dataOfChart } = stasticObject.OverViewAnalysis()
         console.log(labelOfChart,dataOfChart)
-        chart.Barchart(drawPaperOne, labelOfChart, dataOfChart)
+        chart.Barchart(drawPaperOne, labelOfChart, dataOfChart,"x")
 
         const drawPaperTwo = elementFactory.makeElement("canvas","","chart-container","")
         chartThree.append(drawPaperTwo)
@@ -202,9 +234,15 @@ class DomController{
         const drawPaperThree = elementFactory.makeElement("canvas","","chart-container","")
         chartFour.append(drawPaperThree)
         const{labels: labelOfDueBaseAnalysis, data: dataOfDueBaseAnalysis} = stasticObject.dueDateBasesAnalysis()
-        chart.lineChart(drawPaperThree,labelOfDueBaseAnalysis,dataOfDueBaseAnalysis)
+        console.log(labelOfPriority,dataOfPriority)
+        chart.Barchart(drawPaperThree,labelOfDueBaseAnalysis,dataOfDueBaseAnalysis,"y")
         
-
+        const drawPaperFour = elementFactory.makeElement("canvas","","chart-container","")
+        chartTwo.append(drawPaperFour)
+        const{label: labelOfProjectGroupBy, data: dataOfProjectGroupBy} = stasticObject.projectWiseAnalysis()
+        console.log(labelOfProjectGroupBy,dataOfProjectGroupBy)
+        chart.lineChart(drawPaperFour,labelOfProjectGroupBy,dataOfProjectGroupBy)
+        
         // Important Level Stastice
     }
 

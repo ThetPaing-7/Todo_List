@@ -17,6 +17,20 @@ class TaskInputHandler{
             dueDate: "2026-01-30"
         },
         {
+            id: "1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed",
+            taskName: "Update Brand Guidelines",
+            projectName: "Marketing Q1",
+            taskImportantLevel: "Urgent",
+            dueDate: "2026-01-30"
+        },
+        {
+            id: "1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed",
+            taskName: "Update Brand Guidelines",
+            projectName: "Marketing Q1",
+            taskImportantLevel: "Urgent",
+            dueDate: "2026-01-30"
+        },
+    {
             id: "6ec0bd7f-11c0-43da-975e-2a8ad9ebae0b",
             taskName: "Database Schema Migration",
             projectName: "Cloud Migration",

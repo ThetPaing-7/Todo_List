@@ -7,41 +7,68 @@
 }
 
 :root {
-    --bgColor: #F3F8FF;
-    --primaryColor: rgba(52, 58, 174, 0.953);
-    --baseVariant: #FFFFFF;
-    --headerColor: #8EC3B0;
-    --databgColor: #F3F8FF;
-    --notebgColor: #FFFFFF;
-    --displayColor: #FFFFFF;
-    --cardHoverBgColor:#EA9ABB;
-    --buttonBgColor: #ffffff;
-    --buttonBorderColor:#fff;
-    --recordGpBgColor:#dd9898;
-    --dataFontSize: 2rem;
-    --hederFontSize: 20px;
-    --headerFontfamily: "Cardo", serif;
-    --noteFontfamily: "Handlee", cursive;
-}
+    /* Card */
+    --cardBgColor: #ffffff;
+    --cardBorderColor: #e5e7eb;
+    --cardShadow: 0 8px 20px rgba(0,0,0,0.05);
 
+    /* Text */
+    --textPrimary: #222;
+    --textSecondary: #555;
+
+    /* Action Buttons */
+    --completeBtn: #22c55e;
+    --restoreBtn: #3b82f6;
+    --deleteBtn: #f97316;
+    --permanentDeleteBtn: #ef4444;
+
+    --btnTextColor: #ffffff;
+
+    --inputBg: #ffffff;
+    --inputBorder: #d1d5db;
+    --inputFocus: #6366f1;
+    --labelColor: #374151;
+
+    --submitBtn: #4f46e5;
+    --resetBtn: #6b7280;
+
+    --addBtnBgColor:#24206a;
+    --addBtnHoverColor:#0f0c48;
+
+    /* Tab Button */
+    --tabBtn:#473472;
+}
 
 .darkmode{
-    --bgColor:#6218eb;
-    --primaryColor:#A594F9;
-    --baseVariant:#F5EFFF;
-    --headerColor:#CDC1FF;
-    --databgColor: #A594F9;   
-    --notebgColor: #CDC1FF;
-    --displayColor: #CDC1FF;
-    --cardHoverBgColor:#8000ff;
-    --buttonBgColor:#57a8c1;
-    --buttonBorderColor:#57a8c1;
-    --recordGpBgColor:#CDC1FF;
-    --dataFontSize:2rem;
-    --hederFontSize: 20px;
-    --headerFontfamily: "Cardo", serif;
-    --noteFontfamily:"Handlee", cursive;
+    --cardBgColor: #2b1e5a;
+    --cardBorderColor: #3d2f7a;
+    --cardShadow: 0 8px 20px rgba(0,0,0,0.4);
+
+    --textPrimary: #ffffff;
+    --textSecondary: #e0e0e0;
+
+    --completeBtn: #16a34a;
+    --restoreBtn: #2563eb;
+    --deleteBtn: #ea580c;
+    --permanentDeleteBtn: #dc2626;
+
+    --btnTextColor: #ffffff;
+
+     --inputBg: #3d2f7a;
+    --inputBorder: #5b4ab1;
+    --inputFocus: #a78bfa;
+    --labelColor: #e5e7eb;
+
+    --submitBtn: #7c3aed;
+    --resetBtn: #9ca3af;
+
+    --addBtnBgColor:#EAEFEF;
+    --addBtnHoverColor :rgb(188, 229, 171);
+
+    --tabBtn:#FE6244;
+
 }
+
 
 /* Start of the toogle bar */
 #theme-switch{
@@ -85,8 +112,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem;
-    background-color: var(--cardHoverBgColor);
-
+    background-color: var(--cardBgColor);
+    color: var(--textPrimary);
 }
 
 .navBar button{
@@ -114,22 +141,16 @@
 
 .recordGp{
     grid-area: 1 / 1 / 2 / 2;
-    background-color: var(--recordGpBgColor);
+    background-color: var(--cardBgColor);
+    color: var(--textPrimary);
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
 
-.formDisplayGp{
-    grid-area: 2 / 1 / 11 / 2;
-    background-color: pink;
-}
 
-.DisplayGp{
-    overflow: auto;
-    grid-area: 1 / 2 / 11 / 3;
-    background-color: #A594F9;
-}
+
+
 
 /* Add from Button Style */
  
@@ -143,14 +164,14 @@
   border: 2.5px solid var(--buttonBorderColor);
   box-shadow: 0px 0px 20px -20px;
   cursor: pointer;
-  background-color: var(--buttonBgColor);
+  background-color: var(--addBtnBgColor);
   transition: all 0.2s ease-in-out 0ms;
   user-select: none;
   font-family: 'Poppins', sans-serif;
 }
 
 .recordGp button:hover {
-  background-color: var(--buttonBgColor);
+  background-color: var(--addBtnHoverColor);
   box-shadow: 0px 0px 20px -18px;
 }
 
@@ -224,6 +245,220 @@ canvas{
     overflow: hidden;   /* Prevents the chart from pushing the grid boundaries */
 }
 
+/* ============================= */
+/* FORM CONTAINER */
+/* ============================= */
+
+.formDisplayGp{
+    grid-area: 2 / 1 / 11 / 2;
+    align-items: center;
+}
+
+form{
+    width: 90%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+#taskForm,
+#projectForm{
+    background-color: var(--cardBgColor);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: var(--cardShadow);
+}
+
+/* ============================= */
+/* LABEL */
+/* ============================= */
+
+form label{
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--labelColor);
+}
+
+/* ============================= */
+/* INPUT + SELECT */
+/* ============================= */
+
+form input,
+form select,
+.project-option{
+    padding: 0.6rem 0.8rem;
+    border-radius: 8px;
+    border: 1px solid var(--inputBorder);
+    background-color: var(--inputBg);
+    font-size: 0.9rem;
+    outline: none;
+    transition: 0.2s ease;
+    color: var(--textPrimary);
+}
+
+/* Focus Effect */
+
+form input:focus,
+form select:focus{
+    border-color: var(--inputFocus);
+    box-shadow: 0 0 0 3px rgba(99,102,241,0.2);
+}
+
+/* ============================= */
+/* OPTION STYLE */
+/* ============================= */
+
+option{
+    background-color: var(--inputBg);
+    color: var(--textPrimary);
+}
+
+/* ============================= */
+/* FORM BUTTONS */
+/* ============================= */
+
+form button{
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.2s ease;
+    color: white;
+}
+
+/* Submit Button */
+
+button[type="submit"]{
+    background-color: var(--submitBtn);
+}
+
+button[type="submit"]:hover{
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* Reset Button */
+
+button[type="reset"]{
+    background-color: var(--resetBtn);
+}
+
+button[type="reset"]:hover{
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.DisplayGp{
+    overflow: auto;
+    grid-area: 1 / 2 / 11 / 3;
+}
+
+.taskDisplayGp{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.2rem;
+    padding: 20px;
+}
+
+.project-card,
+.task-card{
+    background-color: var(--cardBgColor);
+    border: 1px solid var(--cardBorderColor);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--cardShadow);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-card:hover,
+.task-card:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+}
 
 
+.card h3{
+    font-size: 1.2rem;
+    color: var(--textPrimary);
+    font-family: var(--headerFontfamily);
+}
 
+.card p{
+    font-size: 0.9rem;
+    color: var(--textSecondary);
+    font-family: var(--noteFontfamily);
+}
+
+
+.card-actions{
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+}
+
+
+.card button{
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--btnTextColor);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.card button:hover{
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+#todoDisplayBtn,#completeDisplayBtn,#deleteDisplayBtn{
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    width: 150px;
+    font-weight: 500;
+    transition: 0.2s ease;
+    background-color: var(--tabBtn);
+    margin: 0.2rem 2.3rem;
+}
+
+#todoDisplayBtn:hover,
+#completeDisplayBtn:hover,
+#deleteDisplayBtn:hover{
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.complete-btn{
+    background-color: var(--completeBtn);
+}
+
+.restore-btn{
+    background-color: var(--restoreBtn);
+}
+
+.delete-btn{
+    background-color: var(--deleteBtn);
+}
+
+.permanent-delete-btn{
+    background-color: var(--permanentDeleteBtn);
+}
+
+.project-card-complete{
+    opacity: 0.8;
+    border-left: 6px solid var(--completeBtn);
+}

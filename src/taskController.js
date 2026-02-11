@@ -58,8 +58,8 @@ class taskDOMControll{
             const card = document.createElement("div")
             card.classList.add("task-card")
 
-            const check = document.createElement("input")
-            check.type = "checkbox"
+            const check = document.createElement("button")
+            check.textContent = "Complete"
             this.checkStatusTask(check,task)
 
             const title = document.createElement("p")
@@ -168,8 +168,8 @@ class taskDOMControll{
     }
 
     checkStatusTask(check,task){
-            check.addEventListener("change", () => {
-                if (check.checked) {
+            check.addEventListener("click", () => {
+                {
                     taskInputHandle.complete(task)
                     this.renderTask()
                 }

@@ -131,8 +131,8 @@ class projectDOMControll{
             const card = document.createElement("div")
             card.classList.add("project-card")
 
-            const check = document.createElement("input")
-            check.type = "checkbox"
+            const check = document.createElement("button")
+            check.textContent = "complete"
             this.checkStatusProject(check,card,project)
 
             const projectTitle = document.createElement("h3")
@@ -157,12 +157,8 @@ class projectDOMControll{
     }
 
     checkStatusProject(check,card,project){
-        check.addEventListener("change", () => {
-            if (check.checked) {
-                projectReturn.complete(project)
-            } else {
-                projectReturn.uncomplete(project)
-            }
+        check.addEventListener("click", () => {
+            projectReturn.complete(project)
             this.renderProjects()
         })
     }
