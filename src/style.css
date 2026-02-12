@@ -5,70 +5,93 @@
     overflow-y: hidden;
     overflow-x: hidden;
 }
+/* =========================
+   ☀️ LIGHT MODE (Default)
+   Forest Rainbow Sunshine
+========================= */
 
 :root {
     /* Card */
     --cardBgColor: #ffffff;
-    --cardBorderColor: #e5e7eb;
-    --cardShadow: 0 8px 20px rgba(0,0,0,0.05);
+    --cardBorderColor: #e0f2fe;
+    --cardShadow: 0 20px 45px rgba(255, 200, 0, 0.15);
 
     /* Text */
-    --textPrimary: #222;
-    --textSecondary: #555;
+    --textPrimary: #064e3b;
+    --textSecondary: #3b5f73;
 
     /* Action Buttons */
-    --completeBtn: #22c55e;
-    --restoreBtn: #3b82f6;
+    --completeBtn: #22c55e;       
+    --restoreBtn: #0ea5e9;        
+    --deleteBtn: #f97316;         
+    --permanentDeleteBtn: #ef4444;
+
+    --btnTextColor: #ffffff;
+
+    /* Inputs */
+    --inputBg: #ffffff;
+    --inputBorder: #bae6fd;
+    --inputFocus: #0ea5e9;
+    --labelColor: #065f46;
+
+    /* Primary */
+    --submitBtn: #06b6d4;         
+    --resetBtn: #94a3b8;
+
+    --addBtnBgColor: #15803d;
+    --addBtnHoverColor: #14532d;
+
+    --tabBtn: #facc15;            /* Sunshine yellow */
+    --recordGpBgColor: #f0fdf4;
+}
+
+
+/* =========================
+   🌙 DARK MODE
+   Night Sky + Moonlight
+   (NO GREEN)
+========================= */
+
+.darkmode {
+    /* Card */
+    --cardBgColor: #1e293b;           /* Deep navy */
+    --cardBorderColor: #334155;
+    --cardShadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+
+    /* Text */
+    --textPrimary: #f1f5f9;
+    --textSecondary: #cbd5e1;
+
+    /* Buttons – Night Neon Balance */
+    --completeBtn: #3b82f6;           /* Blue */
+    --restoreBtn: #a855f7;            /* Purple glow */
     --deleteBtn: #f97316;
     --permanentDeleteBtn: #ef4444;
 
     --btnTextColor: #ffffff;
 
-    --inputBg: #ffffff;
-    --inputBorder: #d1d5db;
-    --inputFocus: #6366f1;
-    --labelColor: #374151;
+    /* Inputs */
+    --inputBg: #0f172a;
+    --inputBorder: #334155;
+    --inputFocus: #38bdf8;
+    --labelColor: #e2e8f0;
 
-    --submitBtn: #4f46e5;
-    --resetBtn: #6b7280;
+    /* Primary */
+    --submitBtn: #6366f1;             /* Indigo */
+    --resetBtn: #64748b;
 
-    --addBtnBgColor:#24206a;
-    --addBtnHoverColor:#0f0c48;
+    --addBtnBgColor: #94a3b8;
+    --addBtnHoverColor: #cbd5e1;
 
-    /* Tab Button */
-    --tabBtn:#473472;
+    --tabBtn: #f472b6;                /* Pink moonlight accent */
+    --recordGpBgColor: #1e293b;
 }
 
-.darkmode{
-    --cardBgColor: #2b1e5a;
-    --cardBorderColor: #3d2f7a;
-    --cardShadow: 0 8px 20px rgba(0,0,0,0.4);
 
-    --textPrimary: #ffffff;
-    --textSecondary: #e0e0e0;
-
-    --completeBtn: #16a34a;
-    --restoreBtn: #2563eb;
-    --deleteBtn: #ea580c;
-    --permanentDeleteBtn: #dc2626;
-
-    --btnTextColor: #ffffff;
-
-     --inputBg: #3d2f7a;
-    --inputBorder: #5b4ab1;
-    --inputFocus: #a78bfa;
-    --labelColor: #e5e7eb;
-
-    --submitBtn: #7c3aed;
-    --resetBtn: #9ca3af;
-
-    --addBtnBgColor:#EAEFEF;
-    --addBtnHoverColor :rgb(188, 229, 171);
-
-    --tabBtn:#FE6244;
-
+/* Smooth transition between modes */
+body {
+    transition: background 0.5s ease, color 0.3s ease;
 }
-
 
 /* Start of the toogle bar */
 #theme-switch{
@@ -141,7 +164,7 @@
 
 .recordGp{
     grid-area: 1 / 1 / 2 / 2;
-    background-color: var(--cardBgColor);
+    background-color: var(--recordGpBgColor);
     color: var(--textPrimary);
     display: flex;
     justify-content: space-around;
