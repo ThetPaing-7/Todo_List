@@ -38,8 +38,8 @@ class DomController{
 
         // Three buttons for display gp
         const todo = elementFactory.makeElement("button","To do...","todo-Btn","todoDisplayBtn")
-        const complete = elementFactory.makeElement("button","complete Task","complete-Btn","completeDisplayBtn")
-        const deleteTask = elementFactory.makeElement("button","delete Task","delete-display-Btn","deleteDisplayBtn")
+        const complete = elementFactory.makeElement("button","Complete...","complete-Btn","completeDisplayBtn")
+        const deleteTask = elementFactory.makeElement("button","Delete...","delete-display-Btn","deleteDisplayBtn")
 
         elementFactory.pushElements(DisplayGp,[todo,complete,deleteTask])
         
@@ -169,10 +169,10 @@ class DomController{
                 // to display percentage
                 const{completePercentage: complete = 0,uncompletePercentage: uncomplete = 0} = stasticTaskObject.taskStastics()
                 let completeRateHolder = elementFactory.makeElement("div","Complete Rate :","complete-rate-holder","")
-                let completeRate = elementFactory.makeElement("div",complete,"complete-rate-holder","")
+                let completeRate = elementFactory.makeElement("div",complete,"complete-rate","")
                 
                 let uncompleteRateHolder = elementFactory.makeElement("div","Uncomplete Rate :","uncomplete-rate-holder","")
-                let uncompleteRate = elementFactory.makeElement("div",uncomplete,"uncomplete-rate-holder","")
+                let uncompleteRate = elementFactory.makeElement("div",uncomplete,"uncomplete-rate","")
                 
                 elementFactory.pushElements(stasticsData,[completeRateHolder,completeRate,uncompleteRateHolder,uncompleteRate])
 
@@ -195,12 +195,12 @@ class DomController{
                 // to display percentage
                 const{completePercentage: projectComplete = "0",uncompletePercentage: projectUncomplete = "0"} = stasticProjectObject.taskStastics()
                 let projectCompleteRateHolder = elementFactory.makeElement("div","Complete Rate: ","complete-rate-holder","")
-                let projectCompleteRate = elementFactory.makeElement("div",complete,"complete-rate-holder","")
+                let projectCompleteRate = elementFactory.makeElement("div",projectComplete,"complete-rate","")
                 
                 let projectUncompleteRateHolder = elementFactory.makeElement("div","Uncomplete Rate: ","uncomplete-rate-holder","")
-                let projectUncompleteRate = elementFactory.makeElement("div",uncomplete,"uncomplete-rate-holder","")
+                let projectUncompleteRate = elementFactory.makeElement("div",projectUncomplete,"uncomplete-rate","")
                 
-                elementFactory.pushElements(stasticsData,[projectCompleteRateHolder,projectComplete,projectUncompleteRateHolder,projectUncomplete])
+                elementFactory.pushElements(stasticsData,[projectCompleteRateHolder,projectCompleteRate,projectUncompleteRateHolder,projectUncompleteRate])
 
 
                 this.StaticsStart(chartOne,chartTwo,chartThree,chartFour,stasticProjectObject,projectChart)

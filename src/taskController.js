@@ -60,7 +60,9 @@ class taskDOMControll{
 
             const check = document.createElement("button")
             check.textContent = "Complete"
+            check.style.backgroundColor = "#63b22e"
             this.checkStatusTask(check,task)
+
 
             const title = document.createElement("p")
             title.textContent = task.taskName
@@ -76,6 +78,7 @@ class taskDOMControll{
 
             const deleteBtn = document.createElement("button")
             deleteBtn.textContent = "Delete"
+            deleteBtn.style.backgroundColor = "#ce2525"
 
             deleteBtn.addEventListener("click", () => {
                 this.SoftDeletetask(task)
@@ -101,6 +104,7 @@ class taskDOMControll{
             check.addEventListener("click",() => {
                 this.completeTask(task)
             })
+            check.style.backgroundColor = "#bdcf30"
 
             const title = document.createElement("p")
             title.textContent = task.taskName
@@ -116,6 +120,7 @@ class taskDOMControll{
 
             const deleteBtn = document.createElement("button")
             deleteBtn.textContent = "Delete"
+            deleteBtn.style.backgroundColor = "#c42c2c"
 
             deleteBtn.addEventListener("click", () => {
                 this.deleteCompleteTask(task)
@@ -139,6 +144,7 @@ class taskDOMControll{
 
             const check = document.createElement("button")
             check.textContent = "Restore"
+            check.style.backgroundColor = "#315db5"
             check.addEventListener("click", () => {
                 this.restoreTask(task)
             })
@@ -157,6 +163,7 @@ class taskDOMControll{
 
             const deleteBtn = document.createElement("button")
             deleteBtn.textContent = "Delete"
+            deleteBtn.style.backgroundColor = "#d03434"
 
             deleteBtn.addEventListener("click", () => {
                 this.permantlyDeleteTask(task)

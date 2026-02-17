@@ -9,90 +9,110 @@
    ☀️ LIGHT MODE (Default)
    Forest Rainbow Sunshine
 ========================= */
+/* =========================
+    ☀️ LIGHT MODE (Default)
+    Forest Rainbow Sunshine
+========================= */
 
 :root {
+    --mainBgColor: #F8FAFB; /* Clean off-white */
     /* Card */
-    --cardBgColor: #ffffff;
-    --cardBorderColor: #e0f2fe;
-    --cardShadow: 0 20px 45px rgba(255, 200, 0, 0.15);
+    --cardBgColor: #FFFFFF;
+    --cardBorderColor: #E2E8F0;
+    --cardShadow: 0 10px 30px rgba(6, 78, 59, 0.08);
 
     /* Text */
-    --textPrimary: #064e3b;
-    --textSecondary: #3b5f73;
+    --textPrimary: #064E3B; /* Deep Forest Green */
+    --textSecondary: #475569;
 
     /* Action Buttons */
-    --completeBtn: #22c55e;       
-    --restoreBtn: #0ea5e9;        
-    --deleteBtn: #f97316;         
-    --permanentDeleteBtn: #ef4444;
+    --completeBtn: #10B981;       
+    --restoreBtn: #0EA5E9;         
+    --deleteBtn: #F59E0B;          
+    --permanentDeleteBtn: #EF4444;
 
-    --btnTextColor: #ffffff;
+    --btnTextColor: #FFFFFF;
 
     /* Inputs */
-    --inputBg: #ffffff;
-    --inputBorder: #bae6fd;
-    --inputFocus: #0ea5e9;
-    --labelColor: #065f46;
+    --inputBg: #FFFFFF;
+    --inputBorder: #CBD5E1;
+    --inputFocus: #06B6D4;
+    --labelColor: #065F46;
 
     /* Primary */
-    --submitBtn: #06b6d4;         
-    --resetBtn: #94a3b8;
+    --submitBtn: #0D9488;          
+    --resetBtn: #94A3B8;
 
-    --addBtnBgColor: #15803d;
-    --addBtnHoverColor: #14532d;
+    --addBtnBgColor: #166534;
+    --addBtnHoverColor: #46bb75;
 
-    --tabBtn: #facc15;            /* Sunshine yellow */
-    --recordGpBgColor: #f0fdf4;
+    --tabBtn: #FACC15;
+    --tabHoverBtn: #f5db75;             /* Sunshine yellow */             /* Sunshine yellow */
+    --recordGpBgColor: #F0FDF4;    /* Very light forest tint */
+
+    /* Charts (Light) */
+    --chartOne: #9AEAC7;
+    --chartTwo: #EA9ABB;
+    --chartThree: #33B384;
+    --chartFour: #295B28;
 }
 
 
 /* =========================
-   🌙 DARK MODE
-   Night Sky + Moonlight
-   (NO GREEN)
+    🌙 DARK MODE
+    Night Sky + Moonlight
+    (NO GREEN)
 ========================= */
 
 .darkmode {
+    --mainBgColor: #0F172A; /* Deep Midnight */
     /* Card */
-    --cardBgColor: #1e293b;           /* Deep navy */
+    --cardBgColor: #1E293B;           /* Deep navy slate */
     --cardBorderColor: #334155;
-    --cardShadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+    --cardShadow: 0 12px 40px rgba(0, 0, 0, 0.4);
 
     /* Text */
-    --textPrimary: #f1f5f9;
-    --textSecondary: #cbd5e1;
+    --textPrimary: #F1F5F9;
+    --textSecondary: #94A3B8;
 
     /* Buttons – Night Neon Balance */
-    --completeBtn: #3b82f6;           /* Blue */
-    --restoreBtn: #a855f7;            /* Purple glow */
-    --deleteBtn: #f97316;
-    --permanentDeleteBtn: #ef4444;
+    --completeBtn: #3B82F6;           /* Professional Blue */
+    --restoreBtn: #8B5CF6;            /* Soft Purple */
+    --deleteBtn: #F97316;
+    --permanentDeleteBtn: #EF4444;
 
-    --btnTextColor: #ffffff;
+    --btnTextColor: #FFFFFF;
 
     /* Inputs */
-    --inputBg: #0f172a;
+    --inputBg: #0F172A;
     --inputBorder: #334155;
-    --inputFocus: #38bdf8;
-    --labelColor: #e2e8f0;
+    --inputFocus: #38BDF8;
+    --labelColor: #E2E8F0;
 
     /* Primary */
-    --submitBtn: #6366f1;             /* Indigo */
-    --resetBtn: #64748b;
+    --submitBtn: #6366F1;             /* Indigo */
+    --resetBtn: #475569;
 
-    --addBtnBgColor: #94a3b8;
-    --addBtnHoverColor: #cbd5e1;
+    --addBtnBgColor: #334155;
+    --addBtnHoverColor: #44638e;
 
-    --tabBtn: #f472b6;                /* Pink moonlight accent */
-    --recordGpBgColor: #1e293b;
+    --tabBtn: #F472B6;
+    --tabHoverBtn: #e985b9;                /* Pink moonlight accent */                /* Pink moonlight accent */
+    --recordGpBgColor: #1E293B;
+
+    /* Charts (Dark - No Green) */
+    --chartOne: #312E81; /* Indigo */
+    --chartTwo: #701A75; /* Fuchsia */
+    --chartThree: #1E3A8A; /* Navy */
+    --chartFour: #4C1D95; /* Violet */
+}
+
+body{
+    background-color: var(--mainBgColor);
 }
 
 
-/* Smooth transition between modes */
-body {
-    transition: background 0.5s ease, color 0.3s ease;
-}
-
+/* Smooth transition between modes *
 /* Start of the toogle bar */
 #theme-switch{
   height: 40px;
@@ -223,13 +243,52 @@ body {
 
 .stasticsSwitchBtn{
     grid-area: 1 / 1 / 2 / 2;
-    background-color: #CDC1FF;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    color: var(--textPrimary);
+    margin: 0 1rem;
 }
 
-.stasticsData{
-    grid-area: 1 / 2 / 2 / 3;
-    background-color: #4b2bc9;
+/* CSS */
+.stasticsSwitchBtn button{ 
+  background-color: #222;
+  border-radius: 4px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Farfetch Basis","Helvetica Neue",Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: 0 0.5rem;
+  max-width: none;
+  min-height: 44px;
+  min-width: 10px;
+  outline: none;
+  overflow: hidden;
+  padding: 9px 20px 8px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 30%;
+
 }
+
+.stasticsSwitchBtn button:hover,
+.stasticsSwitchBtn button:focus {
+  opacity: .75;
+}
+
+.stasticsSwitchBtn button:focus{
+    background: #312E81;
+}
+
 
 canvas{
     display: block;
@@ -238,22 +297,19 @@ canvas{
 }
 .chartThree{
     grid-area: 8 / 1 / 13 / 2;
-    background-color: #33b384;
 }
 
 .chartFour{
     grid-area: 2 / 1 / 8 / 2;
-    background-color: #295b28;
 }
 
 .chartOne{
     grid-area: 2 / 2 / 8 / 3;
-    background-color: #9aeac7;
+
 }
 
 .chartTwo{
     grid-area: 8 / 2 / 13 / 3 ;
-    background-color: #EA9ABB;
 }
 
 .chartOne, .chartTwo, .chartThree, .chartFour{
@@ -463,6 +519,7 @@ button[type="reset"]:hover{
 #deleteDisplayBtn:hover{
     opacity: 0.9;
     transform: translateY(-2px);
+    background-color: var(--tabHoverBtn);
 }
 
 .complete-btn{
@@ -484,4 +541,60 @@ button[type="reset"]:hover{
 .project-card-complete{
     opacity: 0.8;
     border-left: 6px solid var(--completeBtn);
+}
+
+.stasticsData{
+    grid-area: 1 / 2 / 2 / 3;
+    display: flex;
+}
+
+.complete-rate-holder,
+.uncomplete-rate-holder{
+    color: var(--textPrimary);
+    margin: 0.5rem 1rem;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+
+}
+
+.complete-rate{
+    margin: 0.5rem 1rem;
+    color: #10B981;
+    font-weight: 800;
+    font-size: 1.5rem;
+}
+
+.uncomplete-rate{
+    margin: 0.5rem 1rem;
+    color: #EF4444;
+    font-weight: 800;
+    font-size: 1.5rem;
+}
+
+.restoreBtn{
+    background-color: #065F46;
+    color: var(--textPrimary);
+}
+
+.deleteBtn{
+    background-color: rgb(185, 53, 53);
+}
+
+.completeBtn{
+    background-color: #10B981;
+}
+
+.uncompleteBtn{
+    background-color: #1E3A8A;
+}
+
+.restoreBtn:hover,
+.deleteBtn:hover,
+.completeBtn:hover,
+.uncompleteBtn:hover{
+    opacity: 0.7;
+    cursor: pointer;
+    font-weight: bold;
+    font-style: italic;
 }

@@ -60,6 +60,7 @@ class projectDOMControll{
 
             const check = document.createElement("button")
             check.textContent = "Restore"
+            check.style.backgroundColor = "#485cbf"
             check.addEventListener("click",() =>{
                 this.restoreProject(project)
             })
@@ -75,6 +76,7 @@ class projectDOMControll{
 
             const deleteBtn = document.createElement("button")
             deleteBtn.textContent = "Delete Permantly"
+            deleteBtn.style.backgroundColor = "#c01c52"
 
             deleteBtn.addEventListener("click", () => {
                 this.permantlyDeleteProject(project)
@@ -100,6 +102,7 @@ class projectDOMControll{
             check.addEventListener("click",() =>{
                 this.completeProject(project)
             })
+            check.style.backgroundColor = "#d0d74c"
 
             const projectTitle = document.createElement("h3")
             projectTitle.textContent = project.projectName
@@ -112,6 +115,7 @@ class projectDOMControll{
 
             const deleteBtn = document.createElement("button")
             deleteBtn.textContent = "Delete"
+            deleteBtn.style.backgroundColor = "#c01c52"
 
             deleteBtn.addEventListener("click", () => {
                 this.deleteCompleteTask(project)
@@ -134,6 +138,7 @@ class projectDOMControll{
             const check = document.createElement("button")
             check.textContent = "complete"
             this.checkStatusProject(check,card,project)
+            check.style.backgroundColor = "#0eac20"
 
             const projectTitle = document.createElement("h3")
             projectTitle.textContent = project.projectName
@@ -146,6 +151,7 @@ class projectDOMControll{
 
             const deleteBtn = document.createElement("button")
             deleteBtn.textContent = "Delete"
+            deleteBtn.style.backgroundColor = "#c01c52"
 
             deleteBtn.addEventListener("click", () => {
                 this.SoftDeleteProject(project)
